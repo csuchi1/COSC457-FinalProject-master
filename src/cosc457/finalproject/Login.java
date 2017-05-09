@@ -6,6 +6,7 @@ import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -140,7 +141,7 @@ public class Login extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) throws ClassNotFoundException, InstantiationException,
-            IllegalAccessException, SQLException {
+            IllegalAccessException, SQLException, Exception {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -178,6 +179,7 @@ public class Login extends javax.swing.JFrame {
         PreparedStatement updateP;
         Statement queryStatement = connection.createStatement();
         updateP = null;
+        /*
         String querys = "select * from jrajew1db.Customer;";
         ResultSet results = queryStatement.executeQuery(querys);
         while (results.next()) {
@@ -185,7 +187,7 @@ public class Login extends javax.swing.JFrame {
             System.out.print("    ");
             System.out.print(results.getString("name"));
             System.out.println();
-        }
+        }*/
         //querys = "UPDATE csuchi1db.P SET pname = 'Test' WHERE pname = 'Nut';";
         //updateP = connection.prepareStatement(querys);
         //updateP.executeUpdate();
