@@ -1,9 +1,11 @@
+
+package cosc457.finalproject;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cosc457.finalproject;
 import com.mysql.jdbc.Connection;
 import static cosc457.finalproject.NetBeans_connection_test.userName;
 import java.sql.*;
@@ -20,22 +22,25 @@ public class Connect
     public Connection con;
     public Statement stat;
     public ResultSet res;
-    public PreparedStatement pstat;
+
+    public PreparedStatement ps;
     static final String userName = "jrajew1";//put your MySQL user name
     static final String password = "Cosc*2awc";//put your MySQL password
     
-   public Connect()
+    public Connect()
+
     {
         systemConnection();
     }
     public void systemConnection(){
-        try
+
+        try 
         {
-           Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.jdbc.Driver");
            con = (Connection) DriverManager.getConnection("jdbc:mysql://triton.towson.edu:3360/jrajew1db", userName, password);
            stat = (Statement) con.createStatement();
-           JOptionPane.showMessageDialog(null, "Connected");
-        }
+        } 
+
         catch(Exception e)
         {
             JOptionPane.showMessageDialog(null, "Not Connected");
