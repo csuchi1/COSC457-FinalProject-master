@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package cosc457.finalproject;
-
+/**
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
@@ -16,11 +16,12 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-
+**/
 /**
  *
  * @author BatesG
  */
+/**
 @Entity
 @Table(name = "Customer", catalog = "jrajew1db", schema = "")
 @NamedQueries({
@@ -99,5 +100,5 @@ public class Customer implements Serializable {
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         changeSupport.removePropertyChangeListener(listener);
     }
-    
 }
+**/
