@@ -107,6 +107,11 @@ public class ModifyCustomer extends javax.swing.JFrame {
 
         jButton3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton3.setText("Update");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -270,6 +275,25 @@ public class ModifyCustomer extends javax.swing.JFrame {
             
         }
     }//GEN-LAST:event_jTable2MouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        try
+        {
+            String s1 = jTextField1.getText();
+            String s2 = jTextField2.getText();
+            
+            connect.ps = connect.con.prepareStatement("UPDATE jrajew1db.Customer SET Name='"+s2+"' WHERE `Customer#`=" + Integer.parseInt(s1));
+            connect.ps.executeUpdate();
+            new ModifyCustomer().setVisible(true);
+            this.dispose();
+        }
+        catch(Exception e)
+        {
+            // System.out.println("FAILED TO UPDATE");
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
