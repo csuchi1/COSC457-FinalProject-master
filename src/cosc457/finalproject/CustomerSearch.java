@@ -5,18 +5,53 @@
  */
 package cosc457.finalproject;
 
+import static cosc457.finalproject.NetBeans_connection_test.userName;
+import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.Vector;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author Kevin
  */
 public class CustomerSearch extends javax.swing.JFrame {
 
+    static final String userName = "jrajew1";//put your MySQL user name
+    static final String password = "Cosc*2awc";//put your MySQL password
+    Connect connect = new Connect();
     /**
      * Creates new form CustomerSearch
      */
     public CustomerSearch() {
         initComponents();
+        showTable();
         
+    }
+  
+    public void showTable()
+    {
+        try
+        {
+            connect.res = connect.stat.executeQuery("Select Customer.*, Quotes.*, Invoices.* FROM ((Customer Inner join Quotes on Customer.`Customer#`=Quotes.`Customer#`) \n" +
+"inner join Invoices on Customer.`Customer#`=Invoices.`Customer#`) where Customer.Name='Garrett'");
+            
+            while(connect.res.next()){
+                String customerNum = connect.res.getString(1);
+                String Name = connect.res.getString(2);
+                
+                Object[] content = {customerNum, Name};
+                
+                DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                model.addRow(content);
+            }
+        }
+        catch (Exception e)
+        {
+            
+        }
     }
 
     /**
@@ -64,7 +99,7 @@ public class CustomerSearch extends javax.swing.JFrame {
         jRadioButton4.setText("Job");
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton1.setText("Submit");
+        jButton1.setText("Search");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -84,13 +119,10 @@ public class CustomerSearch extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Name", "Title 3", "Title 4"
             }
         ));
         jScrollPane2.setViewportView(jTable1);
@@ -100,11 +132,11 @@ public class CustomerSearch extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(138, 138, 138)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
+                .addGap(95, 95, 95))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,6 +204,8 @@ public class CustomerSearch extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+ 	
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
