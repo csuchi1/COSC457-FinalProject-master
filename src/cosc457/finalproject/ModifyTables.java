@@ -10,7 +10,6 @@ package cosc457.finalproject;
  * @author Kevin
  */
 public class ModifyTables extends javax.swing.JFrame {
-
     /**
      * Creates new form ModifyTables
      */
