@@ -35,8 +35,12 @@ public class CustomerSearch extends javax.swing.JFrame {
     {
         try
         {
-            connect.res = connect.stat.executeQuery("Select Customer.*, Quotes.*, Invoices.* FROM ((Customer Inner join Quotes on Customer.`Customer#`=Quotes.`Customer#`) \n" +
-"inner join Invoices on Customer.`Customer#`=Invoices.`Customer#`) where Customer.Name='Garrett'");
+            connect.res = connect.stat.executeQuery("select Customer.*, Job.*, Quotes.*, Inventory.*, Invoices.* from Customer \n" +
+"join Invoices on Customer.`Customer#`=Invoices.`Customer#`\n" +
+"join Inventory on Invoices.`Invoice#`=Inventory.`Invoice#`\n" +
+"join Job on Invoices.`Invoice#`=Job.`Invoice#` \n" +
+"join Quotes on Customer.`Customer#` = Quotes.`Customer#`\n" +
+"where Customer.`Name`='Garrett';");
             
             while(connect.res.next()){
                 String customerNum = connect.res.getString(1);
