@@ -5,19 +5,61 @@
  */
 package cosc457.finalproject;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Kevin
  */
 public class ModifyGraniteQuartz extends javax.swing.JFrame {
-
+    public Connection con;
+    public ResultSet res;
+    public Statement stat;
+    public PreparedStatement pStat = null;
+    public Connect connect = new Connect();
+    
     /**
-     * Creates new form ModifyGraniteQuartz
+     * Creates new form SinksRecieved
      */
     public ModifyGraniteQuartz() {
         initComponents();
+        showTable();
     }
-
+    //update
+    //UPDATE `jrajew1db`.`SinksReceived` SET `DateReceived`='2017-30-05' WHERE `InventoryID`='01';
+    public void showTable(){
+        try
+        {
+            connect.res = connect.stat.executeQuery("SELECT * FROM jrajew1db.`Granite-Quartz`;");
+            while(connect.res.next() || !connect.res.previous()){
+                String inventoryID  = connect.res.getString(1);
+                String lotNo = connect.res.getString(2);
+                //this should be DATE in the DB, not VARCHAR
+                //but this works
+                String date = connect.res.getString(3);
+                //same here
+                String stoneType = connect.res.getString(4);
+                String thickness = connect.res.getString(5);
+                //should be DATE in DB
+                String supplier = connect.res.getString(6);
+                double price = connect.res.getInt(7);
+                String slabSize = connect.res.getString(8);
+                String sizes = connect.res.getString(9);
+               //Object[] content = {inventoryID, sinkModel, qty, cost, dateReceived};
+               Object[] content = {inventoryID, lotNo, date, stoneType, thickness, supplier, price, slabSize, sizes};
+                
+               DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+               model.addRow(content);
+            }
+        }
+        catch (Exception e){
+            System.out.println("SQL ERROR");
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -122,7 +164,7 @@ public class ModifyGraniteQuartz extends javax.swing.JFrame {
 
             },
             new String [] {
-
+                "Inventory ID", "Lot#", "Date", "Stone Type", "Thickness", "Supplier", "Price", "Slab Size", "Sizes"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
