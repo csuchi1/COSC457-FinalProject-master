@@ -161,6 +161,11 @@ public Connection con;
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton2.setText("Add");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -366,6 +371,38 @@ public Connection con;
     private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField5ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        try 
+        {
+            connect.ps = connect.con.prepareStatement("INSERT INTO jrajew1db.SS_Inventory VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            String s1 = jTextField1.getText();
+            String s2 = jTextField2.getText();
+            String s3 = jTextField3.getText();
+            String s4 = jTextField4.getText();
+            String s5 = jTextField5.getText();
+            String s6 = jTextField6.getText();
+            String s7 = jTextField7.getText();
+            String s8 = jTextField8.getText();
+            
+            connect.ps.setString(1, s1);
+            connect.ps.setString(2, s2);
+            connect.ps.setString(3, s3);
+            connect.ps.setString(4, s4);
+            connect.ps.setString(5, s5);
+            connect.ps.setString(6, s6);
+            connect.ps.setString(7, s7);
+            connect.ps.setString(8, s8);
+            
+            connect.ps.executeUpdate();
+            new ModifySolidSurfaces().setVisible(true);
+            this.dispose();
+        }
+        catch(Exception e) {
+            System.out.println("FAIL");
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
