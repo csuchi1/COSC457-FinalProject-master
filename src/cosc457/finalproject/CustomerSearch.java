@@ -35,25 +35,79 @@ public class CustomerSearch extends javax.swing.JFrame {
     {
         try
         {
-            connect.res = connect.stat.executeQuery("Select Customer.*, Quotes.*, Invoices.* FROM ((Customer Inner join Quotes on Customer.`Customer#`=Quotes.`Customer#`) \n" +
-"inner join Invoices on Customer.`Customer#`=Invoices.`Customer#`) where Customer.Name='Garrett'");
-            
-            while(connect.res.next()){
-                String customerNum = connect.res.getString(1);
-                String Name = connect.res.getString(2);
+            connect.stat = connect.con.createStatement();
+            String s1 = jTextField2.getText();
+            String s2 = "select Customer.`Customer#`, Customer.`Name`, Job.JobName,Job.Location,Job.`Function`,Job.Edge,Job.`Date`, Job.`Color/Grade`, \n" +
+"Job.`Granite/Quartz`, Job.`Granite/Quartz_Repair`,\n" +
+"Job.SolidSurfaces, Job.SolidSurfaces_Repair, Job.L_Install, Job.Cabinet, Job.`Dropoff/Pickups`, Job.Tile,\n" +
+"Quotes.QuoteID, Quotes.FollowUpDate, Quotes.Awarded, Quotes.Reason, Quotes.Price, Quotes.ContactLocation, \n" +
+"Quotes.`Date`, Quotes.`Open/Closed`, Inventory.InventoryID, Invoices.`Invoice#`, Invoices.Install_date, Invoices.Due_date, Invoices.Check_Date,\n" +
+"Invoices.Business, Invoices.Amount_due, Invoices.Total_Amount, Invoices.`PONum`\n" +
+"from Customer \n" +
+"join Invoices on Customer.`Customer#`=Invoices.`Customer#`\n" +
+"join Inventory on Invoices.`Invoice#`=Inventory.`Invoice#`\n" +
+"join Job on Invoices.`Invoice#`=Job.`Invoice#` \n" +
+"join Quotes on Customer.`Customer#` = Quotes.`Customer#` where Customer.Name like '%"+s1+"%'";
+            connect.res = connect.stat.executeQuery(s2);
+        }catch(Exception e)
+        {
+         System.out.println("yup");   
+        }
+             try{
+ while(connect.res.next()){
+                String CustomerNum = connect.res.getString(1);
+                String Customer_Name = connect.res.getString(2);
+                String JobName = connect.res.getString(3);
+                String JobLocation = connect.res.getString(4);
+                String Function = connect.res.getString(5);
+                String Edge = connect.res.getString(6);
+                String JobDate = connect.res.getString(7);
+                String ColorGrade = connect.res.getString(8);
+                String GraniteQuartz = connect.res.getString(9);
+                String GraniteQuartzR = connect.res.getString(10);
+                String SS = connect.res.getString(11);
+                String SS_R = connect.res.getString(12);
+                String L_Install = connect.res.getString(13);
+                String Cabinet = connect.res.getString(14);
+                String DropPickup = connect.res.getString(15);
+                String Tile = connect.res.getString(16);
+                String QuoteID = connect.res.getString(17);
+                String FollowUpDate = connect.res.getString(18);
+                String Awarded = connect.res.getString(19);
+                String Reason = connect.res.getString(20);
+                String Price = connect.res.getString(21);
+                String ContactLocation = connect.res.getString(22);
+                String QuoteDate = connect.res.getString(23);
+                String OpenClosed = connect.res.getString(24);
+                String InventoryID = connect.res.getString(25);
+                String InvoiceNum = connect.res.getString(26);
+                String Install_date = connect.res.getString(27);
+                String Due_Date = connect.res.getString(28);
+                String Check_Date = connect.res.getString(29);
+                String Business = connect.res.getString(30);
+                String Amount_Due = connect.res.getString(31);
+                String Total_Amount = connect.res.getString(32);
+                String PONum = connect.res.getString(33);
                 
-                Object[] content = {customerNum, Name};
+                Object[] content = {CustomerNum, Customer_Name, JobName,JobLocation,Function, Edge, JobDate, ColorGrade, GraniteQuartz,GraniteQuartzR, SS, 
+                    SS_R, L_Install, Cabinet, DropPickup, Tile, QuoteID, FollowUpDate, Awarded, Reason, Price, ContactLocation, QuoteDate, OpenClosed, 
+                InventoryID, InvoiceNum, Install_date, Due_Date, Check_Date, Business, Amount_Due, Total_Amount, PONum};
                 
                 DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
                 model.addRow(content);
-            }
-        }
-        catch (Exception e)
-        {
             
+            }
+            connect.ps.executeQuery();
+            new CustomerSearch().setVisible(true);
+            this.dispose();
         }
+        catch(Exception e)
+        {
+         System.out.println("eror212");   
+        }
+        
+        
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -66,10 +120,6 @@ public class CustomerSearch extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jTextField2 = new javax.swing.JTextField();
@@ -85,18 +135,6 @@ public class CustomerSearch extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Customer Name: ");
-
-        jRadioButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jRadioButton1.setText("Invoices");
-
-        jRadioButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jRadioButton2.setText("Revenue");
-
-        jRadioButton3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jRadioButton3.setText("Quotes");
-
-        jRadioButton4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jRadioButton4.setText("Job");
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton1.setText("Search");
@@ -122,7 +160,7 @@ public class CustomerSearch extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Name", "Title 3", "Title 4"
+                "ID", "Name", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8", "Title 9", "Title 10", "Title 11", "Title 12", "Title 13", "Title 14", "Title 15", "Title 16", "Title 17", "Title 18", "Title 19", "Title 20", "Title 21", "Title 22", "Title 23", "Title 24", "Title 25", "Title 26", "Title 27", "Title 28", "Title 29", "Title 30", "Title 31", "Title 32", "Title 33"
             }
         ));
         jScrollPane2.setViewportView(jTable1);
@@ -138,28 +176,17 @@ public class CustomerSearch extends javax.swing.JFrame {
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(95, 95, 95))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addGap(214, 214, 214))
+                        .addGap(446, 446, 446)
+                        .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(89, 89, 89)
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jRadioButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jRadioButton2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jRadioButton3)
-                        .addGap(18, 18, 18)
-                        .addComponent(jRadioButton4)
-                        .addContainerGap(94, Short.MAX_VALUE))))
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(553, Short.MAX_VALUE))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,14 +196,10 @@ public class CustomerSearch extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton3)
-                    .addComponent(jRadioButton4))
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton1))
@@ -187,25 +210,101 @@ public class CustomerSearch extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 32, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
- 	
-        
+        // Search Button TODO add your handling code here:
+        //showTable();
+ 	/**
+        try
+        {
+            String s2 = jTextField2.getText();
+            
+            connect.ps = connect.con.prepareStatement("select Customer.`Customer#`, Customer.`Name`, Job.JobName,Job.Location,Job.`Function`,Job.Edge,Job.`Date`, Job.`Color/Grade`, \n" +
+"Job.`Granite/Quartz`, Job.`Granite/Quartz_Repair`,\n" +
+"Job.SolidSurfaces, Job.SolidSurfaces_Repair, Job.L_Install, Job.Cabinet, Job.`Dropoff/Pickups`, Job.Tile,\n" +
+"Quotes.QuoteID, Quotes.FollowUpDate, Quotes.Awarded, Quotes.Reason, Quotes.Price, Quotes.ContactLocation, \n" +
+"Quotes.`Date`, Quotes.`Open/Closed`, Inventory.InventoryID, Invoices.`Invoice#`, Invoices.Install_date, Invoices.Due_date, Invoices.Check_Date,\n" +
+"Invoices.Business, Invoices.Amount_due, Invoices.Total_Amount, Invoices.`PONum`\n" +
+"from Customer \n" +
+"join Invoices on Customer.`Customer#`=Invoices.`Customer#`\n" +
+"join Inventory on Invoices.`Invoice#`=Inventory.`Invoice#`\n" +
+"join Job on Invoices.`Invoice#`=Job.`Invoice#` \n" +
+"join Quotes on Customer.`Customer#` = Quotes.`Customer#`\n" +
+"where Customer.`Name`like '%"+s2+"%'");
+
+            connect.ps.executeQuery();
+            new CustomerSearch().setVisible(true);
+            this.dispose();
+        }
+        catch(Exception e)
+        {
+         System.out.println(e);   
+        }
+            /**
+            while(connect.res.next()){
+                String CustomerNum = connect.res.getString(1);
+                String Customer_Name = connect.res.getString(2);
+                String JobName = connect.res.getString(3);
+                String JobLocation = connect.res.getString(4);
+                String Function = connect.res.getString(5);
+                String Edge = connect.res.getString(6);
+                String JobDate = connect.res.getString(7);
+                String ColorGrade = connect.res.getString(8);
+                String GraniteQuartz = connect.res.getString(9);
+                String GraniteQuartzR = connect.res.getString(10);
+                String SS = connect.res.getString(11);
+                String SS_R = connect.res.getString(12);
+                String L_Install = connect.res.getString(13);
+                String Cabinet = connect.res.getString(14);
+                String DropPickup = connect.res.getString(15);
+                String Tile = connect.res.getString(16);
+                String QuoteID = connect.res.getString(17);
+                String FollowUpDate = connect.res.getString(18);
+                String Awarded = connect.res.getString(19);
+                String Reason = connect.res.getString(20);
+                String Price = connect.res.getString(21);
+                String ContactLocation = connect.res.getString(22);
+                String QuoteDate = connect.res.getString(23);
+                String OpenClosed = connect.res.getString(24);
+                String InventoryID = connect.res.getString(25);
+                String InvoiceNum = connect.res.getString(26);
+                String Install_date = connect.res.getString(27);
+                String Due_Date = connect.res.getString(28);
+                String Check_Date = connect.res.getString(29);
+                String Business = connect.res.getString(30);
+                String Amount_Due = connect.res.getString(31);
+                String Total_Amount = connect.res.getString(32);
+                String PONum = connect.res.getString(33);
+                
+                Object[] content = {CustomerNum, Customer_Name, JobName,JobLocation,Function, Edge, JobDate, ColorGrade, GraniteQuartz,GraniteQuartzR, SS, 
+                    SS_R, L_Install, Cabinet, DropPickup, Tile, QuoteID, FollowUpDate, Awarded, Reason, Price, ContactLocation, QuoteDate, OpenClosed, 
+                InventoryID, InvoiceNum, Install_date, Due_Date, Check_Date, Business, Amount_Due, Total_Amount, PONum};
+                
+                DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                model.addRow(content);
+                
+            }
+        }
+        catch(Exception e)
+        {
+            // System.out.println("FAILED TO UPDATE");
+            System.out.println(e);
+        }
+         **/         
+        showTable();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -255,10 +354,6 @@ public class CustomerSearch extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField2;

@@ -1,11 +1,12 @@
-
-package cosc457.finalproject;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+package cosc457.finalproject;
+//import com.sql.jdbc.Connection;
+
 import com.mysql.jdbc.Connection;
 import static cosc457.finalproject.NetBeans_connection_test.userName;
 import java.sql.*;
@@ -15,6 +16,7 @@ import javax.swing.JOptionPane;
 import java.sql.PreparedStatement;
 /**
  *
+
  * @author Kevin
  */
 public class Connect 
