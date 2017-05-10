@@ -143,11 +143,11 @@ public class ModifyTables extends javax.swing.JFrame {
             new ModifyGraniteQuartz().setVisible(true);
             this.setVisible(false);
         }
-        else if(selected.toString().equals("Inventory"))
-        {
-            new ModifyInventory().setVisible(true);
-            this.setVisible(false);
-        }
+//        else if(selected.toString().equals("Inventory"))
+//        {
+//            new ModifyInventory().setVisible(true);
+//            this.setVisible(false);
+//        }
         else if(selected.toString().equals("Invoices"))
         {
             new ModifyInvoices().setVisible(true);

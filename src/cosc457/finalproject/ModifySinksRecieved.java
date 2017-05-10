@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.text.DateFormat;
 import java.util.Locale;
 import java.text.ParseException;
+import java.time.*;
 /**
  *
  * @author Kevin
@@ -57,8 +58,12 @@ public class ModifySinksRecieved extends javax.swing.JFrame {
                model.addRow(content);
             }
         }
-        catch (Exception e){}
+        catch (Exception e){
+            System.out.println(e);
+        }
     }
+    
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -79,8 +84,6 @@ public class ModifySinksRecieved extends javax.swing.JFrame {
         jTextField3 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -134,16 +137,6 @@ public class ModifySinksRecieved extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel6.setText("Date Recieved:");
-
-        jTextField5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
-            }
-        });
-
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton1.setText("Back");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -171,12 +164,24 @@ public class ModifySinksRecieved extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, true, false, true, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
         jTable1.getTableHeader().setReorderingAllowed(false);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jButton3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -195,40 +200,41 @@ public class ModifySinksRecieved extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(222, 222, 222)
+                                .addComponent(jLabel1))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(70, 70, 70)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel3)
+                                            .addComponent(jLabel2))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
+                                            .addComponent(jTextField2))
+                                        .addGap(49, 49, 49)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(jLabel5)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(jLabel4)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                        .addGap(0, 60, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel4))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
-                                    .addComponent(jTextField2)
-                                    .addComponent(jTextField3))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel5))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jTextField4)
-                                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 60, Short.MAX_VALUE)))
+                        .addGap(107, 107, 107)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(222, 222, 222)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -244,25 +250,23 @@ public class ModifySinksRecieved extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel5)))
-                .addGap(13, 13, 13)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addComponent(jButton2)
-                .addGap(52, 52, 52)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton3)
                     .addComponent(jButton1)
-                    .addComponent(jButton3))
-                .addContainerGap())
+                    .addComponent(jButton2))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -287,51 +291,60 @@ public class ModifySinksRecieved extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        String inventoryID = jTextField1.getText();
-        System.out.println(inventoryID);
-        String sinkModel = jTextField2.getText();
-        int qty = Integer.parseInt(jTextField3.getText());
-        double cost = Double.parseDouble(jTextField4.getText());
-        
-        String insertStatement = "INSERT INTO jrajew1db.Inventory (`InventoryID`, `Invoice#`, `JobName`) VALUES(?, 0, 0);";
-        
-        /*try{
-            Date dateReceived = format.parse(jTextField5.getText());}
-        catch(ParseException e){};
-        */
-        
+        // KEVIN'S customer update
         try
         {
-            con.setAutoCommit(false);
-            pStat = connect.con.prepareStatement("INSERT INTO jrajew1db.Inventory (`InventoryID`, `Invoice#`, `JobName`) VALUES(?, 0, 0);");
-            pStat.setString(1, inventoryID);
-            pStat.executeUpdate();
-            con.commit();
-            
-            /*
-            connect.pstat = con.prepareStatement("INSERT INTO jrajew1db.SinksReceived (`InventoryID`, `SinkModel`, `Qty`, `Cost`, `DateReceived`) VALUES (?, ?, ?, ?, null );");   
-            connect.pstat.setObject(1, inventoryID);
-            connect.pstat.setObject(2, sinkModel);
-            connect.pstat.setObject(3, qty);
-            connect.pstat.setObject(4, cost);
-            connect.pstat.executeUpdate();
-            System.out.println("INSERT INTO `jrajew1db`.`SinksReceived` (`InventoryID`, `SinkModel`, `Qty`, `Cost`, `DateReceived`) VALUES (?, ?, ?, ?, '0000-00-00');");
-            //connect.pstat.setDate(5, dateReceived);
-            */
+            String s1 = jTextField1.getText();
+            String s2 = jTextField2.getText();
+            String s3 = jTextField3.getText();
+            String s4 = jTextField4.getText();
+            LocalDate s5 = LocalDate.now();
+            //UPDATE `jrajew1db`.`SinksReceived` SET `InventoryID`='20', `SinkModel`='Joe ', `Qty`='5', `Cost`='305', `DateReceived`='2017-05-31' WHERE `InventoryID`='30';
+            connect.ps = connect.con.prepareStatement("UPDATE jrajew1db.SinksReceived "
+                    + "SET SinkModel='"+s2+
+                    "', Qty='"+s3+
+                    "', Cost='"+s4+
+                    "', DateReceived='"+s5.getYear()+"-"+s5.getMonthValue()+"-"+s5.getDayOfMonth()+
+                    "'  WHERE `InventoryID`=" + s1);
+            connect.ps.executeUpdate();
+            new ModifySinksRecieved().setVisible(true);
+            this.dispose();
         }
-        catch (SQLException e)
+        catch(Exception e)
         {
-            System.out.println("SQLError");
-       }  
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        try 
+        {
+//            connect.ps = connect.con.prepareStatement("insert into jrajew1db.Inventory values (?, 'not set', 'not set');");
+            String s1 = jTextField1.getText();
+            String s2 = jTextField2.getText();
+            String s3 = jTextField3.getText();
+            String s4 = jTextField4.getText();
+//            connect.ps.setString(1, s1);
+//            connect.ps.executeUpdate();
+            
+            connect.ps = connect.con.prepareStatement("insert into jrajew1db.SinksReceived values (?, ?, ?, ?, ?);");
+            connect.ps.setString(1, s1);
+            connect.ps.setString(2, s2);
+            connect.ps.setString(3, s3);
+            connect.ps.setString(4, s4);
+            //FIX
+            LocalDate local = LocalDate.now();
+            Date date = new java.sql.Date(local.getYear(), local.getMonthValue(), local.getDayOfMonth());
+            System.out.println(date.toString());
+            connect.ps.setDate(5, new java.sql.Date(local.getYear(), local.getMonthValue(), local.getDayOfMonth()));
+            connect.ps.executeUpdate();
+            new ModifySinksRecieved().setVisible(true);
+            this.dispose();
+        }
+        catch(Exception e) {
+            System.out.println(e);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -349,6 +362,33 @@ public class ModifySinksRecieved extends javax.swing.JFrame {
     private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField4ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        // method for clicking on an entry to populate the fields
+        int row = jTable1.getSelectedRow();
+        //this gets the primary key, since the first column is InventoryID
+        //then queries for the primary key
+//        try
+//        {
+//            connect.stat = connect.con.createStatement();
+//            String sql = "select * from jrajew1db.SinksReceived where name='"+tableClick+"'";
+//            connect.res = connect.stat.executeQuery(sql);
+//            
+//            if(connect.res.next())
+//            {
+                jTextField1.setText(jTable1.getModel().getValueAt(row, 0).toString());
+                jTextField2.setText(jTable1.getModel().getValueAt(row, 1).toString());
+                jTextField3.setText(jTable1.getModel().getValueAt(row, 2).toString());
+                jTextField4.setText(jTable1.getModel().getValueAt(row, 3).toString());
+                //jTextField5.setText(jTable1.getModel().getValueAt(row, 4).toString());
+//            }
+//        }
+//        catch(SQLException e)
+//        {
+//            
+//        }
+    }//GEN-LAST:event_jTable1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -395,7 +435,6 @@ public class ModifySinksRecieved extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
@@ -403,6 +442,5 @@ public class ModifySinksRecieved extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
 }
