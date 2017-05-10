@@ -27,7 +27,7 @@ public class ScheduleTotalJobs extends javax.swing.JFrame {
     static final String password = "Cosc*2awc";//put your MySQL password
     Connect connect = new Connect();
     //private PreparedStatement stmt;
-    //private ResultSet res;
+    //private ResultSet res2;
     //private Connection conn;
 
     /**
@@ -67,7 +67,7 @@ public class ScheduleTotalJobs extends javax.swing.JFrame {
         jLabel1.setText("Schedule of Total Jobs");
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton1.setText("Cabniet Installs");
+        jButton1.setText("Cabinet Installs");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -150,70 +150,66 @@ public class ScheduleTotalJobs extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(55, 55, 55)
-                        .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
-                        .addGap(90, 90, 90))
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(50, 50, 50))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(107, 107, 107)
                         .addComponent(jLabel1)))
-                .addGap(104, 104, 104))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton5))
-                        .addGap(81, 81, 81)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton6)
-                            .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(50, 50, 50))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton6)
                     .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton7)
                     .addComponent(jButton3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4)
                     .addComponent(jButton8))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton5)
-                        .addGap(5, 5, 5))
-                    .addComponent(jButton9, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2)
-                        .addContainerGap())
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton10)
-                        .addContainerGap(18, Short.MAX_VALUE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton5)
+                    .addComponent(jButton9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -238,18 +234,16 @@ public class ScheduleTotalJobs extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //cabniets NEW
-      
+
         try {
-            connect.ps=null;
-            String querys = "select * from jrajew1db.Customer;";
-            /*String querys = "SELECT count(JobName) \n" +
-"FROM (SELECT JobName \n" +
-"		FROM Job\n" +
-"		WHERE year(Date)=2017 AND month(Date)=5 AND \n" +
-"        ((Cabinet=1))) U;";*/
-            //String querys = "select count(JobName) from jrajew1db.Job";
-            connect.res = connect.stat.executeQuery(querys);
-            
+            connect.ps = null;
+            String query1 = "SELECT count(JobName) \n"
+                    + "FROM (SELECT JobName \n"
+                    + "		FROM Job\n"
+                    + "		WHERE year(Date)=2017 AND month(Date)=5 AND \n"
+                    + "        ((Cabinet=1))) U;";
+            connect.res = connect.stat.executeQuery(query1);
+
             Workbook wb = new HSSFWorkbook();
             Sheet personSheet = wb.createSheet("TEST");
             Row headerRow = personSheet.createRow(0);
@@ -257,24 +251,20 @@ public class ScheduleTotalJobs extends javax.swing.JFrame {
             Cell addressHeaderCell = headerRow.createCell(1);
 
             int row = 1;
+            int row2=0;
+            Row dataRow2 = personSheet.createRow(row2);
+            Cell dataQuoteCell2 = dataRow2.createCell(0);
+            dataQuoteCell2.setCellValue("#ofCabnietInstalls");
             while (connect.res.next()) {
-                //String name = connect.res.getString("count(JobName)");
-                //String name = connect.res.getString("count(JobName)");
-                
-                //connect.res.getString("Customer#");
-                //String address = connect.res.getString("count(JobName)");
 
                 Row dataRow = personSheet.createRow(row);
 
                 Cell dataNameCell = dataRow.createCell(0);
-                dataNameCell.setCellValue(connect.res.getString("Customer#"));
-
-                Cell dataAddressCell = dataRow.createCell(1);
-                dataAddressCell.setCellValue(connect.res.getString("name"));
+                dataNameCell.setCellValue(connect.res.getString("count(JobName)"));
                 row = row + 1;
             }
 
-            FileOutputStream fileOut = new FileOutputStream(new File("Cabniet Installs"));
+            FileOutputStream fileOut = new FileOutputStream(new File("CabnietInstalls"));
             wb.write(fileOut);
             fileOut.close();
             System.out.println("done");
@@ -289,602 +279,369 @@ public class ScheduleTotalJobs extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        /*
-        //Drop off pick up
-        // TODO add your handling code here:
-        // TODO add your handling code here:
-        //generate report
-        //SELECT count(JobName) FROM (SELECT JobName FROM jrajew1db.Job WHERE 
-        //year(Date)=2017 AND month(Date)=5 AND ((Cabinet=1))) U;
-        try{
-        //String sql = "SELECT count(JobName) FROM (SELECT JobName FROM jrajew1db.Job WHERE year(Date)=2017 AND month(Date)=5 AND ((Cabinet=1))) U; ";
-        
-        Object newInstance;
-        newInstance = Class.forName("com.mysql.jdbc.Driver").newInstance();
-        connection = DriverManager.getConnection("jdbc:mysql://triton.towson.edu:3360/jrajew1db", userName, password);
-        PreparedStatement updateP;
-        Statement queryStatement = connection.createStatement();
-        updateP = null;
-       
-        
-        Workbook wb = new HSSFWorkbook();
-        Sheet personSheet = wb.createSheet("TEST1");
-        Row headerRow = personSheet.createRow(0);
-        Cell nameHeaderCell = headerRow.createCell(0);
-        Cell addressHeaderCell = headerRow.createCell(1);
+        //dropoff pick up
+        try {
+            connect.ps = null;
+            String query1 = "SELECT count(JobName) \n"
+                    + "FROM (SELECT JobName \n"
+                    + "		FROM Job\n"
+                    + "		WHERE year(Date)=2017 AND month(Date)=5 AND \n"
+                    + "        ((`Dropoff/Pickups`=1))) U;";
+            connect.res = connect.stat.executeQuery(query1);
 
-        String sql1 = "select count(JobName) from (select JobName from Job where year(Date)=2017 and month(Date)=5 and ((`Dropoff/Pickups`=1))) U;";
-        //String sql2 = "select count(JobName) from (select JobName from jrajew1db.Job where year(Date) =2017 and month(Date)=5 and ((`Dropoff/Pickups`=0) or (SolidSurfaces_Repair=0) or (`Granite/Quartz_Repair`=0))) U;";
-        PreparedStatement ps = connection.prepareStatement(sql1);
-        ResultSet resultSet = ps.executeQuery();
-        
-        int row = 1;
-        while (resultSet.next()) {
-            String name = resultSet.getString("count(JobName)");
-            //String address = resultSet.getString("Name");
+            Workbook wb = new HSSFWorkbook();
+            Sheet personSheet = wb.createSheet("TEST");
+            Row headerRow = personSheet.createRow(0);
+            Cell nameHeaderCell = headerRow.createCell(0);
+            Cell addressHeaderCell = headerRow.createCell(1);
 
-            Row dataRow = personSheet.createRow(row);
+            int row = 1;
+            int row2=0;
+            Row dataRow2 = personSheet.createRow(row2);
+            Cell dataQuoteCell2 = dataRow2.createCell(0);
+            dataQuoteCell2.setCellValue("#ofDropOffPickUp");
+            while (connect.res.next()) {
 
-            Cell dataNameCell = dataRow.createCell(0);
-            dataNameCell.setCellValue(name);
+                Row dataRow = personSheet.createRow(row);
 
-            //Cell dataAddressCell = dataRow.createCell(1);
-            //dataAddressCell.setCellValue(address);
+             
+                Cell dataNameCell = dataRow.createCell(0);
+                dataNameCell.setCellValue(connect.res.getString("count(JobName)"));
+                row = row + 1;
+            }
 
-            row = row + 1;
+            FileOutputStream fileOut = new FileOutputStream(new File("DropOffPickUp"));
+            wb.write(fileOut);
+            fileOut.close();
+            System.out.println("done");
+
+        } catch (Exception e) {
+            //e.printStackTrace();
+            System.out.println("errorz");
+            //System.out.println(e);
         }
-        
-         
-        FileOutputStream fileOut = new FileOutputStream(new File("DropOffPickUp"));
-        wb.write(fileOut);
-        fileOut.close();
-        System.out.println("done");
-        
-        
-        }
-        catch(SQLException e){
-            System.out.println("error1");
-        }
-        catch(FileNotFoundException c){
-            System.out.println("error2");
-        }
-        catch(IOException c){
-            System.out.println("error3");
-        }
-        catch(ClassNotFoundException r){
-            System.out.println("error4");
-        }
-        catch(InstantiationException p){
-            System.out.println("error5");
-        }
-        catch(IllegalAccessException t){
-            System.out.println("error6");
-        }
-         */
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        /*
+
         //job installs
-        // TODO add your handling code here:
-        try{
-        //String sql = "SELECT count(JobName) FROM (SELECT JobName FROM jrajew1db.Job WHERE year(Date)=2017 AND month(Date)=5 AND ((Cabinet=1))) U; ";
-        
-        Object newInstance;
-        newInstance = Class.forName("com.mysql.jdbc.Driver").newInstance();
-        connection = DriverManager.getConnection("jdbc:mysql://triton.towson.edu:3360/jrajew1db", userName, password);
-        PreparedStatement updateP;
-        Statement queryStatement = connection.createStatement();
-        updateP = null;
-       
-        
-        Workbook wb = new HSSFWorkbook();
-        Sheet personSheet = wb.createSheet("TEST1");
-        Row headerRow = personSheet.createRow(0);
-        Cell nameHeaderCell = headerRow.createCell(0);
-        Cell addressHeaderCell = headerRow.createCell(1);
+        try {
+            connect.ps = null;
+            String query1 = "SELECT count(JobName) \n"
+                    + "FROM (SELECT JobName \n"
+                    + "		FROM Job\n"
+                    + "		WHERE year(Date)=2017 AND month(Date)=5 AND \n"
+                    + "        ((`Dropoff/Pickups`=0) or (SolidSurfaces_Repair=0)\n"
+                    + "        or (`Granite/Quartz_Repair`=0))) U;";
+            connect.res = connect.stat.executeQuery(query1);
 
-        String sql1 = "SELECT count(JobName) \n" +
-"FROM (SELECT JobName \n" +
-"		FROM Job\n" +
-"		WHERE year(Date)=2017 AND month(Date)=5 AND \n" +
-"        ((`Dropoff/Pickups`=0) or (SolidSurfaces_Repair=0)\n" +
-"        or (`Granite/Quartz_Repair`=0))) U;";
-        //String sql2 = "select count(JobName) from (select JobName from jrajew1db.Job where year(Date) =2017 and month(Date)=5 and ((`Dropoff/Pickups`=0) or (SolidSurfaces_Repair=0) or (`Granite/Quartz_Repair`=0))) U;";
-        PreparedStatement ps = connection.prepareStatement(sql1);
-        ResultSet resultSet = ps.executeQuery();
-        
-        int row = 1;
-        while (resultSet.next()) {
-            String name = resultSet.getString("count(JobName)");
-            //String address = resultSet.getString("Name");
+            Workbook wb = new HSSFWorkbook();
+            Sheet personSheet = wb.createSheet("TEST");
+            Row headerRow = personSheet.createRow(0);
+            Cell nameHeaderCell = headerRow.createCell(0);
+            Cell addressHeaderCell = headerRow.createCell(1);
 
-            Row dataRow = personSheet.createRow(row);
+            int row = 1;
+            int row2=0;
+            Row dataRow2 = personSheet.createRow(row2);
+            Cell dataQuoteCell2 = dataRow2.createCell(0);
+            dataQuoteCell2.setCellValue("#ofJobInstalls");
+            while (connect.res.next()) {
 
-            Cell dataNameCell = dataRow.createCell(0);
-            dataNameCell.setCellValue(name);
+                Row dataRow = personSheet.createRow(row);
 
-            //Cell dataAddressCell = dataRow.createCell(1);
-            //dataAddressCell.setCellValue(address);
+            
+                Cell dataNameCell = dataRow.createCell(0);
+                dataNameCell.setCellValue(connect.res.getString("count(JobName)"));
+                row = row + 1;
+            }
 
-            row = row + 1;
+            FileOutputStream fileOut = new FileOutputStream(new File("JobInstalls"));
+            wb.write(fileOut);
+            fileOut.close();
+            System.out.println("done");
+
+        } catch (Exception e) {
+            //e.printStackTrace();
+            System.out.println("errorz");
+            //System.out.println(e);
         }
-        
-         
-        FileOutputStream fileOut = new FileOutputStream(new File("JobInstalls"));
-        wb.write(fileOut);
-        fileOut.close();
-        System.out.println("done");
-        
-        
-        }
-        catch(SQLException e){
-            System.out.println("error1");
-        }
-        catch(FileNotFoundException c){
-            System.out.println("error2");
-        }
-        catch(IOException c){
-            System.out.println("error3");
-        }
-        catch(ClassNotFoundException r){
-            System.out.println("error4");
-        }
-        catch(InstantiationException p){
-            System.out.println("error5");
-        }
-        catch(IllegalAccessException t){
-            System.out.println("error6");
-        }*/
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        /*
         //granite-quartz install
-        // TODO add your handling code here:
-        try{
-        //String sql = "SELECT count(JobName) FROM (SELECT JobName FROM jrajew1db.Job WHERE year(Date)=2017 AND month(Date)=5 AND ((Cabinet=1))) U; ";
-        
-        Object newInstance;
-        newInstance = Class.forName("com.mysql.jdbc.Driver").newInstance();
-        connection = DriverManager.getConnection("jdbc:mysql://triton.towson.edu:3360/jrajew1db", userName, password);
-        PreparedStatement updateP;
-        Statement queryStatement = connection.createStatement();
-        updateP = null;
-       
-        
-        Workbook wb = new HSSFWorkbook();
-        Sheet personSheet = wb.createSheet("TEST1");
-        Row headerRow = personSheet.createRow(0);
-        Cell nameHeaderCell = headerRow.createCell(0);
-        Cell addressHeaderCell = headerRow.createCell(1);
+        try {
+            connect.ps = null;
+            String query1 = "SELECT count(JobName) \n"
+                    + "FROM (SELECT JobName \n"
+                    + "		FROM Job\n"
+                    + "		WHERE year(Date)=2017 AND month(Date)=5 AND \n"
+                    + "        ((`Granite/Quartz`=1))) U;";
+            connect.res = connect.stat.executeQuery(query1);
 
-        String sql1 = "SELECT count(JobName) \n" +
-"FROM (SELECT JobName \n" +
-"		FROM Job\n" +
-"		WHERE year(Date)=2017 AND month(Date)=5 AND \n" +
-"        ((`Dropoff/Pickups`=0) or (SolidSurfaces_Repair=0)\n" +
-"        or (`Granite/Quartz_Repair`=0))) U;";
-        //String sql2 = "select count(JobName) from (select JobName from jrajew1db.Job where year(Date) =2017 and month(Date)=5 and ((`Dropoff/Pickups`=0) or (SolidSurfaces_Repair=0) or (`Granite/Quartz_Repair`=0))) U;";
-        PreparedStatement ps = connection.prepareStatement(sql1);
-        ResultSet resultSet = ps.executeQuery();
-        
-        int row = 1;
-        while (resultSet.next()) {
-            String name = resultSet.getString("count(JobName)");
-            //String address = resultSet.getString("Name");
+            Workbook wb = new HSSFWorkbook();
+            Sheet personSheet = wb.createSheet("TEST");
+            Row headerRow = personSheet.createRow(0);
+            Cell nameHeaderCell = headerRow.createCell(0);
+            Cell addressHeaderCell = headerRow.createCell(1);
 
-            Row dataRow = personSheet.createRow(row);
+            int row = 1;
+             int row2=0;
+            Row dataRow2 = personSheet.createRow(row2);
+            Cell dataQuoteCell2 = dataRow2.createCell(0);
+            dataQuoteCell2.setCellValue("#ofGraniteQuartzInstall");
+            while (connect.res.next()) {
 
-            Cell dataNameCell = dataRow.createCell(0);
-            dataNameCell.setCellValue(name);
+                Row dataRow = personSheet.createRow(row);
 
-            //Cell dataAddressCell = dataRow.createCell(1);
-            //dataAddressCell.setCellValue(address);
+                
+                Cell dataNameCell = dataRow.createCell(0);
+                dataNameCell.setCellValue(connect.res.getString("count(JobName)"));
+                row = row + 1;
+            }
 
-            row = row + 1;
+            FileOutputStream fileOut = new FileOutputStream(new File("GraniteQuartzInstall"));
+            wb.write(fileOut);
+            fileOut.close();
+            System.out.println("done");
+
+        } catch (Exception e) {
+            //e.printStackTrace();
+            System.out.println("errorz");
+            //System.out.println(e);
         }
-        
-         
-        FileOutputStream fileOut = new FileOutputStream(new File("GraniteQquartzInstall"));
-        wb.write(fileOut);
-        fileOut.close();
-        System.out.println("done");
-        
-        
-        }
-        catch(SQLException e){
-            System.out.println("error1");
-        }
-        catch(FileNotFoundException c){
-            System.out.println("error2");
-        }
-        catch(IOException c){
-            System.out.println("error3");
-        }
-        catch(ClassNotFoundException r){
-            System.out.println("error4");
-        }
-        catch(InstantiationException p){
-            System.out.println("error5");
-        }
-        catch(IllegalAccessException t){
-            System.out.println("error6");
-        }*/
+
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        /*
+
         //granit-quartz repair
-        // TODO add your handling code here:
-        try{
-        //String sql = "SELECT count(JobName) FROM (SELECT JobName FROM jrajew1db.Job WHERE year(Date)=2017 AND month(Date)=5 AND ((Cabinet=1))) U; ";
-        
-        Object newInstance;
-        newInstance = Class.forName("com.mysql.jdbc.Driver").newInstance();
-        connection = DriverManager.getConnection("jdbc:mysql://triton.towson.edu:3360/jrajew1db", userName, password);
-        PreparedStatement updateP;
-        Statement queryStatement = connection.createStatement();
-        updateP = null;
-       
-        
-        Workbook wb = new HSSFWorkbook();
-        Sheet personSheet = wb.createSheet("TEST1");
-        Row headerRow = personSheet.createRow(0);
-        Cell nameHeaderCell = headerRow.createCell(0);
-        Cell addressHeaderCell = headerRow.createCell(1);
+        try {
+            connect.ps = null;
+            String query1 = "SELECT count(JobName) \n"
+                    + "FROM (SELECT JobName \n"
+                    + "		FROM Job\n"
+                    + "		WHERE year(Date)=2017 AND month(Date)=5 AND \n"
+                    + "        ((`Granite/Quartz_Repair`=1))) U;";
+            connect.res = connect.stat.executeQuery(query1);
 
-        String sql1 = "SELECT count(JobName) \n" +
-"FROM (SELECT JobName \n" +
-"		FROM Job\n" +
-"		WHERE year(Date)=2017 AND month(Date)=5 AND \n" +
-"        ((`Granite/Quartz_Repair`=1))) U;";
-        //String sql2 = "select count(JobName) from (select JobName from jrajew1db.Job where year(Date) =2017 and month(Date)=5 and ((`Dropoff/Pickups`=0) or (SolidSurfaces_Repair=0) or (`Granite/Quartz_Repair`=0))) U;";
-        PreparedStatement ps = connection.prepareStatement(sql1);
-        ResultSet resultSet = ps.executeQuery();
-        
-        int row = 1;
-        while (resultSet.next()) {
-            String name = resultSet.getString("count(JobName)");
-            //String address = resultSet.getString("Name");
+            Workbook wb = new HSSFWorkbook();
+            Sheet personSheet = wb.createSheet("TEST");
+            Row headerRow = personSheet.createRow(0);
+            Cell nameHeaderCell = headerRow.createCell(0);
+            Cell addressHeaderCell = headerRow.createCell(1);
 
-            Row dataRow = personSheet.createRow(row);
+            int row = 1;
+              int row2=0;
+            Row dataRow2 = personSheet.createRow(row2);
+            Cell dataQuoteCell2 = dataRow2.createCell(0);
+            dataQuoteCell2.setCellValue("#ofGranitQuartzRepair");
+            while (connect.res.next()) {
 
-            Cell dataNameCell = dataRow.createCell(0);
-            dataNameCell.setCellValue(name);
+                Row dataRow = personSheet.createRow(row);
 
-            //Cell dataAddressCell = dataRow.createCell(1);
-            //dataAddressCell.setCellValue(address);
+               
+                Cell dataNameCell = dataRow.createCell(0);
+                dataNameCell.setCellValue(connect.res.getString("count(JobName)"));
+                row = row + 1;
+            }
 
-            row = row + 1;
+            FileOutputStream fileOut = new FileOutputStream(new File("GranitQuartzRepair"));
+            wb.write(fileOut);
+            fileOut.close();
+            System.out.println("done");
+
+        } catch (Exception e) {
+            //e.printStackTrace();
+            System.out.println("errorz");
+            //System.out.println(e);
         }
-        
-         
-        FileOutputStream fileOut = new FileOutputStream(new File("GranitQuartzRepair"));
-        wb.write(fileOut);
-        fileOut.close();
-        System.out.println("done");
-        
-        
-        }
-        catch(SQLException e){
-            System.out.println("error1");
-        }
-        catch(FileNotFoundException c){
-            System.out.println("error2");
-        }
-        catch(IOException c){
-            System.out.println("error3");
-        }
-        catch(ClassNotFoundException r){
-            System.out.println("error4");
-        }
-        catch(InstantiationException p){
-            System.out.println("error5");
-        }
-        catch(IllegalAccessException t){
-            System.out.println("error6");
-        }*/
+
 
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        /*
+
         //job repairs
-        // TODO add your handling code here:
-         try{
-        //String sql = "SELECT count(JobName) FROM (SELECT JobName FROM jrajew1db.Job WHERE year(Date)=2017 AND month(Date)=5 AND ((Cabinet=1))) U; ";
-        
-        Object newInstance;
-        newInstance = Class.forName("com.mysql.jdbc.Driver").newInstance();
-        connection = DriverManager.getConnection("jdbc:mysql://triton.towson.edu:3360/jrajew1db", userName, password);
-        PreparedStatement updateP;
-        Statement queryStatement = connection.createStatement();
-        updateP = null;
-       
-        
-        Workbook wb = new HSSFWorkbook();
-        Sheet personSheet = wb.createSheet("TEST1");
-        Row headerRow = personSheet.createRow(0);
-        Cell nameHeaderCell = headerRow.createCell(0);
-        Cell addressHeaderCell = headerRow.createCell(1);
+        try {
+            connect.ps = null;
+            String query1 = "SELECT count(JobName) \n"
+                    + "FROM (SELECT JobName \n"
+                    + "		FROM Job\n"
+                    + "		WHERE year(Date)=2017 AND month(Date)=5 AND \n"
+                    + "        ((SolidSurfaces_Repair=1) or (`Granite/Quartz_Repair`=1))) U;";
+            connect.res = connect.stat.executeQuery(query1);
 
-        String sql1 = "SELECT count(JobName) \n" +
-"FROM (SELECT JobName \n" +
-"		FROM Job\n" +
-"		WHERE year(Date)=2017 AND month(Date)=5 AND \n" +
-"        ((SolidSurfaces_Repair=1) or (`Granite/Quartz_Repair`=1))) U;";
-        //String sql2 = "select count(JobName) from (select JobName from jrajew1db.Job where year(Date) =2017 and month(Date)=5 and ((`Dropoff/Pickups`=0) or (SolidSurfaces_Repair=0) or (`Granite/Quartz_Repair`=0))) U;";
-        PreparedStatement ps = connection.prepareStatement(sql1);
-        ResultSet resultSet = ps.executeQuery();
-        
-        int row = 1;
-        while (resultSet.next()) {
-            String name = resultSet.getString("count(JobName)");
-            //String address = resultSet.getString("Name");
+            Workbook wb = new HSSFWorkbook();
+            Sheet personSheet = wb.createSheet("TEST");
+            Row headerRow = personSheet.createRow(0);
+            Cell nameHeaderCell = headerRow.createCell(0);
+            Cell addressHeaderCell = headerRow.createCell(1);
 
-            Row dataRow = personSheet.createRow(row);
+            int row = 1;
+              int row2=0;
+            Row dataRow2 = personSheet.createRow(row2);
+            Cell dataQuoteCell2 = dataRow2.createCell(0);
+            dataQuoteCell2.setCellValue("#ofJobRepairs");
+            while (connect.res.next()) {
 
-            Cell dataNameCell = dataRow.createCell(0);
-            dataNameCell.setCellValue(name);
+                Row dataRow = personSheet.createRow(row);
 
-            //Cell dataAddressCell = dataRow.createCell(1);
-            //dataAddressCell.setCellValue(address);
+              
+                Cell dataNameCell = dataRow.createCell(0);
+                dataNameCell.setCellValue(connect.res.getString("count(JobName)"));
+                row = row + 1;
+            }
 
-            row = row + 1;
+            FileOutputStream fileOut = new FileOutputStream(new File("JobRepairs"));
+            wb.write(fileOut);
+            fileOut.close();
+            System.out.println("done");
+
+        } catch (Exception e) {
+            //e.printStackTrace();
+            System.out.println("errorz");
+            //System.out.println(e);
         }
-        
-         
-        FileOutputStream fileOut = new FileOutputStream(new File("JobRepairs"));
-        wb.write(fileOut);
-        fileOut.close();
-        System.out.println("done");
-        
-        
-        }
-        catch(SQLException e){
-            System.out.println("error1");
-        }
-        catch(FileNotFoundException c){
-            System.out.println("error2");
-        }
-        catch(IOException c){
-            System.out.println("error3");
-        }
-        catch(ClassNotFoundException r){
-            System.out.println("error4");
-        }
-        catch(InstantiationException p){
-            System.out.println("error5");
-        }
-        catch(IllegalAccessException t){
-            System.out.println("error6");
-        }
-         */
+
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        /*
+
         //solid surfaces install
-        // TODO add your handling code here:
-               try{
-        //String sql = "SELECT count(JobName) FROM (SELECT JobName FROM jrajew1db.Job WHERE year(Date)=2017 AND month(Date)=5 AND ((Cabinet=1))) U; ";
-        
-        Object newInstance;
-        newInstance = Class.forName("com.mysql.jdbc.Driver").newInstance();
-        connection = DriverManager.getConnection("jdbc:mysql://triton.towson.edu:3360/jrajew1db", userName, password);
-        PreparedStatement updateP;
-        Statement queryStatement = connection.createStatement();
-        updateP = null;
-       
-        
-        Workbook wb = new HSSFWorkbook();
-        Sheet personSheet = wb.createSheet("TEST1");
-        Row headerRow = personSheet.createRow(0);
-        Cell nameHeaderCell = headerRow.createCell(0);
-        Cell addressHeaderCell = headerRow.createCell(1);
+        try {
+            connect.ps = null;
+            String query1 = "SELECT count(JobName) \n"
+                    + "FROM (SELECT JobName \n"
+                    + "		FROM Job\n"
+                    + "		WHERE year(Date)=2017 AND month(Date)=5 AND \n"
+                    + "        ((SolidSurfaces=1))) U;";
+            connect.res = connect.stat.executeQuery(query1);
 
-        String sql1 = "SELECT count(JobName) \n" +
-"FROM (SELECT JobName \n" +
-"		FROM Job\n" +
-"		WHERE year(Date)=2017 AND month(Date)=5 AND \n" +
-"        ((SolidSurfaces_Repair=1) or (`Granite/Quartz_Repair`=1))) U;";
-        //String sql2 = "select count(JobName) from (select JobName from jrajew1db.Job where year(Date) =2017 and month(Date)=5 and ((`Dropoff/Pickups`=0) or (SolidSurfaces_Repair=0) or (`Granite/Quartz_Repair`=0))) U;";
-        PreparedStatement ps = connection.prepareStatement(sql1);
-        ResultSet resultSet = ps.executeQuery();
-        
-        int row = 1;
-        while (resultSet.next()) {
-            String name = resultSet.getString("count(JobName)");
-            //String address = resultSet.getString("Name");
+            Workbook wb = new HSSFWorkbook();
+            Sheet personSheet = wb.createSheet("TEST");
+            Row headerRow = personSheet.createRow(0);
+            Cell nameHeaderCell = headerRow.createCell(0);
+            Cell addressHeaderCell = headerRow.createCell(1);
 
-            Row dataRow = personSheet.createRow(row);
+            int row = 1;
+             int row2=0;
+            Row dataRow2 = personSheet.createRow(row2);
+            Cell dataQuoteCell2 = dataRow2.createCell(0);
+            dataQuoteCell2.setCellValue("#ofSolidSurfacesInstall");
+            while (connect.res.next()) {
 
-            Cell dataNameCell = dataRow.createCell(0);
-            dataNameCell.setCellValue(name);
+                Row dataRow = personSheet.createRow(row);
 
-            //Cell dataAddressCell = dataRow.createCell(1);
-            //dataAddressCell.setCellValue(address);
-
-            row = row + 1;
-        }
-        
          
-        FileOutputStream fileOut = new FileOutputStream(new File("SolidSurfacesInstall"));
-        wb.write(fileOut);
-        fileOut.close();
-        System.out.println("done");
-        
-        
+                Cell dataNameCell = dataRow.createCell(0);
+                dataNameCell.setCellValue(connect.res.getString("count(JobName)"));
+                row = row + 1;
+            }
+
+            FileOutputStream fileOut = new FileOutputStream(new File("SolidSurfacesInstall"));
+            wb.write(fileOut);
+            fileOut.close();
+            System.out.println("done");
+
+        } catch (Exception e) {
+            //e.printStackTrace();
+            System.out.println("errorz");
+            //System.out.println(e);
         }
-        catch(SQLException e){
-            System.out.println("error1");
-        }
-        catch(FileNotFoundException c){
-            System.out.println("error2");
-        }
-        catch(IOException c){
-            System.out.println("error3");
-        }
-        catch(ClassNotFoundException r){
-            System.out.println("error4");
-        }
-        catch(InstantiationException p){
-            System.out.println("error5");
-        }
-        catch(IllegalAccessException t){
-            System.out.println("error6");
-        }*/
 
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        /*
+
         //solid surfaces repair
-        // TODO add your handling code here:
-        try{
-        //String sql = "SELECT count(JobName) FROM (SELECT JobName FROM jrajew1db.Job WHERE year(Date)=2017 AND month(Date)=5 AND ((Cabinet=1))) U; ";
-        
-        Object newInstance;
-        newInstance = Class.forName("com.mysql.jdbc.Driver").newInstance();
-        connection = DriverManager.getConnection("jdbc:mysql://triton.towson.edu:3360/jrajew1db", userName, password);
-        PreparedStatement updateP;
-        Statement queryStatement = connection.createStatement();
-        updateP = null;
-       
-        
-        Workbook wb = new HSSFWorkbook();
-        Sheet personSheet = wb.createSheet("TEST1");
-        Row headerRow = personSheet.createRow(0);
-        Cell nameHeaderCell = headerRow.createCell(0);
-        Cell addressHeaderCell = headerRow.createCell(1);
+        try {
+            connect.ps = null;
+            String query1 = "SELECT count(JobName) \n"
+                    + "FROM (SELECT JobName \n"
+                    + "		FROM Job\n"
+                    + "		WHERE year(Date)=2017 AND month(Date)=5 AND \n"
+                    + "        ((SolidSurfaces_Repair=1))) U;";
+            connect.res = connect.stat.executeQuery(query1);
 
-        String sql1 = "SELECT count(JobName) \n" +
-"FROM (SELECT JobName \n" +
-"		FROM Job\n" +
-"		WHERE year(Date)=2017 AND month(Date)=5 AND \n" +
-"        ((SolidSurfaces_Repair=1))) U;";
-        //String sql2 = "select count(JobName) from (select JobName from jrajew1db.Job where year(Date) =2017 and month(Date)=5 and ((`Dropoff/Pickups`=0) or (SolidSurfaces_Repair=0) or (`Granite/Quartz_Repair`=0))) U;";
-        PreparedStatement ps = connection.prepareStatement(sql1);
-        ResultSet resultSet = ps.executeQuery();
-        
-        int row = 1;
-        while (resultSet.next()) {
-            String name = resultSet.getString("count(JobName)");
-            //String address = resultSet.getString("Name");
+            Workbook wb = new HSSFWorkbook();
+            Sheet personSheet = wb.createSheet("TEST");
+            Row headerRow = personSheet.createRow(0);
+            Cell nameHeaderCell = headerRow.createCell(0);
+            Cell addressHeaderCell = headerRow.createCell(1);
 
-            Row dataRow = personSheet.createRow(row);
+            int row = 1;
+            int row2=0;
+            Row dataRow2 = personSheet.createRow(row2);
+            Cell dataQuoteCell2 = dataRow2.createCell(0);
+            dataQuoteCell2.setCellValue("#ofSolidSurfacesRepair");
+            while (connect.res.next()) {
 
-            Cell dataNameCell = dataRow.createCell(0);
-            dataNameCell.setCellValue(name);
+                Row dataRow = personSheet.createRow(row);
 
-            //Cell dataAddressCell = dataRow.createCell(1);
-            //dataAddressCell.setCellValue(address);
+           
+                Cell dataNameCell = dataRow.createCell(0);
+                dataNameCell.setCellValue(connect.res.getString("count(JobName)"));
+                row = row + 1;
+            }
 
-            row = row + 1;
+            FileOutputStream fileOut = new FileOutputStream(new File("SolidSurfacesRepair"));
+            wb.write(fileOut);
+            fileOut.close();
+            System.out.println("done");
+
+        } catch (Exception e) {
+            //e.printStackTrace();
+            System.out.println("errorz");
+            //System.out.println(e);
         }
-        
-         
-        FileOutputStream fileOut = new FileOutputStream(new File("SolidSurfacesRepair"));
-        wb.write(fileOut);
-        fileOut.close();
-        System.out.println("done");
-        
-        
-        }
-        catch(SQLException e){
-            System.out.println("error1");
-        }
-        catch(FileNotFoundException c){
-            System.out.println("error2");
-        }
-        catch(IOException c){
-            System.out.println("error3");
-        }
-        catch(ClassNotFoundException r){
-            System.out.println("error4");
-        }
-        catch(InstantiationException p){
-            System.out.println("error5");
-        }
-        catch(IllegalAccessException t){
-            System.out.println("error6");
-        }*/
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        /*
+
         //tile count
-        // TODO add your handling code here:
-                try{
-        //String sql = "SELECT count(JobName) FROM (SELECT JobName FROM jrajew1db.Job WHERE year(Date)=2017 AND month(Date)=5 AND ((Cabinet=1))) U; ";
-        
-        Object newInstance;
-        newInstance = Class.forName("com.mysql.jdbc.Driver").newInstance();
-        connection = DriverManager.getConnection("jdbc:mysql://triton.towson.edu:3360/jrajew1db", userName, password);
-        PreparedStatement updateP;
-        Statement queryStatement = connection.createStatement();
-        updateP = null;
-       
-        
-        Workbook wb = new HSSFWorkbook();
-        Sheet personSheet = wb.createSheet("TEST1");
-        Row headerRow = personSheet.createRow(0);
-        Cell nameHeaderCell = headerRow.createCell(0);
-        Cell addressHeaderCell = headerRow.createCell(1);
+        try {
+            connect.ps = null;
+            String query1 = "SELECT count(JobName) \n"
+                    + "FROM (SELECT JobName \n"
+                    + "		FROM Job\n"
+                    + "		WHERE year(Date)=2017 AND month(Date)=5 AND \n"
+                    + "        ((Tile=1))) U;";
+            connect.res = connect.stat.executeQuery(query1);
 
-        String sql1 = "SELECT count(JobName) \n" +
-"FROM (SELECT JobName \n" +
-"		FROM Job\n" +
-"		WHERE year(Date)=2017 AND month(Date)=5 AND \n" +
-"        ((Tile=1))) U;";
-        //String sql2 = "select count(JobName) from (select JobName from jrajew1db.Job where year(Date) =2017 and month(Date)=5 and ((`Dropoff/Pickups`=0) or (SolidSurfaces_Repair=0) or (`Granite/Quartz_Repair`=0))) U;";
-        PreparedStatement ps = connection.prepareStatement(sql1);
-        ResultSet resultSet = ps.executeQuery();
-        
-        int row = 1;
-        while (resultSet.next()) {
-            String name = resultSet.getString("count(JobName)");
-            //String address = resultSet.getString("Name");
+            Workbook wb = new HSSFWorkbook();
+            Sheet personSheet = wb.createSheet("TEST");
+            Row headerRow = personSheet.createRow(0);
+            Cell nameHeaderCell = headerRow.createCell(0);
+            Cell addressHeaderCell = headerRow.createCell(1);
 
-            Row dataRow = personSheet.createRow(row);
+            int row = 1;
+              int row2=0;
+            Row dataRow2 = personSheet.createRow(row2);
+            Cell dataQuoteCell2 = dataRow2.createCell(0);
+            dataQuoteCell2.setCellValue("#ofTiles");
+            while (connect.res.next()) {
 
-            Cell dataNameCell = dataRow.createCell(0);
-            dataNameCell.setCellValue(name);
+                Row dataRow = personSheet.createRow(row);
 
-            //Cell dataAddressCell = dataRow.createCell(1);
-            //dataAddressCell.setCellValue(address);
+          
+                Cell dataNameCell = dataRow.createCell(0);
+                dataNameCell.setCellValue(connect.res.getString("count(JobName)"));
+                row = row + 1;
+            }
 
-            row = row + 1;
+            FileOutputStream fileOut = new FileOutputStream(new File("TileCount"));
+            wb.write(fileOut);
+            fileOut.close();
+            System.out.println("done");
+
+        } catch (Exception e) {
+            //e.printStackTrace();
+            System.out.println("errorz");
+            //System.out.println(e);
         }
-        
-         
-        FileOutputStream fileOut = new FileOutputStream(new File("TileCount"));
-        wb.write(fileOut);
-        fileOut.close();
-        System.out.println("done");
-        
-        
-        }
-        catch(SQLException e){
-            System.out.println("error1");
-        }
-        catch(FileNotFoundException c){
-            System.out.println("error2");
-        }
-        catch(IOException c){
-            System.out.println("error3");
-        }
-        catch(ClassNotFoundException r){
-            System.out.println("error4");
-        }
-        catch(InstantiationException p){
-            System.out.println("error5");
-        }
-        catch(IllegalAccessException t){
-            System.out.println("error6");
-        }*/
     }//GEN-LAST:event_jButton10ActionPerformed
 
     /**
@@ -1051,4 +808,4 @@ public class ScheduleTotalJobs extends javax.swing.JFrame {
             System.out.println("error6");
         }
 
-*/
+ */

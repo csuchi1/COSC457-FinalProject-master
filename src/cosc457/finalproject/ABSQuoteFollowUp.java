@@ -5,11 +5,25 @@
  */
 package cosc457.finalproject;
 
+import org.apache.commons.io.FileExistsException;
+import org.apache.commons.io.FileUtils;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.*;
+import java.io.*;
+import java.sql.*;
+import java.util.*;
+
 /**
  *
  * @author Kevin
  */
 public class ABSQuoteFollowUp extends javax.swing.JFrame {
+
+    static final String userName = "jrajew1";//put your MySQL user name
+    static final String password = "Cosc*2awc";//put your MySQL password
+    Connect connect = new Connect();
 
     /**
      * Creates new form DBSQuoteFollowUp
@@ -61,6 +75,11 @@ public class ABSQuoteFollowUp extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton1.setText("Generate");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton2.setText("Back");
@@ -75,42 +94,42 @@ public class ABSQuoteFollowUp extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(132, 132, 132))
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(67, 67, 67)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(115, 115, 115)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(79, 79, 79))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(99, 99, 99))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(96, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(77, 77, 77)
+                .addGap(41, 41, 41)
                 .addComponent(jLabel1)
-                .addGap(53, 53, 53)
+                .addGap(43, 43, 43)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(81, 81, 81)
+                .addGap(105, 105, 105)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap(46, Short.MAX_VALUE))
+                    .addComponent(jButton2)
+                    .addComponent(jButton1))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -136,6 +155,87 @@ public class ABSQuoteFollowUp extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        //gernerate the report 
+        try {
+            //String query1 = "select Count(QuoteID), Name, Date, Price, FollowUpDate, `Open/Closed`, Reason, ContactLocation, Awarded from Customer C, Quotes Q where C.`Customer#` = Q.`Customer#` and (Month= ? AND Year=?);";
+            connect.ps = connect.con.prepareStatement("select count(QuoteID), Name \n" +
+"from jrajew1db.Customer C, jrajew1db.Quotes Q \n" +
+"where C.`Customer#` = Q.`Customer#` and (Month(Date)=? AND Year(Date)=?);");
+            //, Name, Date, Price, FollowUpDate, `Open/Closed`, Reason, ContactLocation, Awarded
+            String s1 = jComboBox1.getSelectedItem().toString();
+            String s2 = jTextField1.getText();
+            connect.ps.setString(1, s1);
+            connect.ps.setString(2, s2);
+            connect.res = connect.ps.executeQuery();
+            //connect.ps.executeQuery();
+            
+            
+
+            Workbook wb = new HSSFWorkbook();
+            Sheet personSheet = wb.createSheet("TEST");
+            Row headerRow = personSheet.createRow(0);
+            Cell nameHeaderCell = headerRow.createCell(0);
+            Cell addressHeaderCell = headerRow.createCell(1);
+        
+            int row = 1;
+            while (connect.res.next()) {
+                //Row dataRow = personSheet.createRow(row);
+                //Cell dataNameCell = dataRow.createCell(1);
+                /*String quote = connect.res.getString("Count(QuoteID)");
+                String name = connect.res.getString("Name");
+                String date = connect.res.getString("Date");
+                String price = connect.res.getString("Price");
+                String FollowUpDate = connect.res.getString("FollowUpDate");
+                String open = connect.res.getString("`Open/Closed`");
+                String reason = connect.res.getString("Reason");
+                String contract = connect.res.getString("ContactLocation");
+                String awarded = connect.res.getString("Awarded");*/
+
+                Row dataRow = personSheet.createRow(row);
+
+                Cell dataQuoteCell = dataRow.createCell(0);
+                dataQuoteCell.setCellValue(connect.res.getString("count(QuoteID)"));
+
+                Cell dataNameCell = dataRow.createCell(1);
+                dataNameCell.setCellValue(connect.res.getString("Name"));
+
+                /*Cell dataDateCell = dataRow.createCell(2);
+                dataDateCell.setCellValue(connect.res.getString("Date"));
+
+                Cell dataPriceCell = dataRow.createCell(3);
+                dataPriceCell.setCellValue(connect.res.getString("Price"));
+
+                Cell datafollowCell = dataRow.createCell(4);
+                datafollowCell.setCellValue(connect.res.getString("FollowUpDate"));
+
+                Cell dataOpenCell = dataRow.createCell(5);
+                dataOpenCell.setCellValue(connect.res.getString("`Open/Closed`"));
+
+                Cell dataReasonCell = dataRow.createCell(6);
+                dataReasonCell.setCellValue(connect.res.getString("Reason"));
+
+                Cell datacontractCell = dataRow.createCell(7);
+                dataReasonCell.setCellValue(connect.res.getString("ContactLocation"));
+
+                Cell dataawardCell = dataRow.createCell(8);
+                dataawardCell.setCellValue(connect.res.getString("Awarded"));*/
+
+                row = row + 1;
+
+            }
+
+            FileOutputStream fileOut = new FileOutputStream(new File("ABSQuoteFollowUp"));
+            wb.write(fileOut);
+            fileOut.close();
+            System.out.println("done");
+
+        } catch (Exception e) {
+            System.out.println("erorr");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

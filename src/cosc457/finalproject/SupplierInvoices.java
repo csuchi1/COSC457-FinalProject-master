@@ -4,13 +4,25 @@
  * and open the template in the editor.
  */
 package cosc457.finalproject;
-
+import org.apache.commons.io.FileExistsException;
+import org.apache.commons.io.FileUtils;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.*;
+import java.io.*;
+import java.sql.*;
+import java.util.*;
 /**
  *
  * @author Kevin
  */
 public class SupplierInvoices extends javax.swing.JFrame {
 
+    static final String userName = "jrajew1";//put your MySQL user name
+    static final String password = "Cosc*2awc";//put your MySQL password
+    Connect connect = new Connect();
+    //private PreparedStatement stmt;
     /**
      * Creates new form SupplierInvoices
      */
@@ -48,6 +60,11 @@ public class SupplierInvoices extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton1.setText("Generate");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton2.setText("Back");
@@ -114,6 +131,67 @@ public class SupplierInvoices extends javax.swing.JFrame {
         new Reports().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        //nlkfne
+        
+         try {
+            //String query1 = "select Count(QuoteID), Name, Date, Price, FollowUpDate, `Open/Closed`, Reason, ContactLocation, Awarded from Customer C, Quotes Q where C.`Customer#` = Q.`Customer#` and (Month= ? AND Year=?);";
+            connect.ps = connect.con.prepareStatement("select * from Invoices where year(Install_date) =?;");
+            
+            String s1 = jTextField1.getText();
+            connect.ps.setString(1, s1);
+             connect.res = connect.ps.executeQuery();
+             
+            Workbook wb = new HSSFWorkbook();
+            Sheet personSheet = wb.createSheet("TEST");
+            Row headerRow = personSheet.createRow(0);
+            Cell nameHeaderCell = headerRow.createCell(0);
+            Cell addressHeaderCell = headerRow.createCell(1);
+            
+            int row = 1;
+            while (connect.res.next()) {
+                Row dataRow = personSheet.createRow(row);
+
+                Cell dataQuoteCell = dataRow.createCell(0);
+                dataQuoteCell.setCellValue(connect.res.getString("Invoice#"));
+                
+                Cell dataaCell = dataRow.createCell(1);
+                dataaCell.setCellValue(connect.res.getString("Customer#"));
+                
+                Cell databCell = dataRow.createCell(2);
+                databCell.setCellValue(connect.res.getString("InventoryID"));
+                
+                Cell datacCell = dataRow.createCell(3);
+                datacCell.setCellValue(connect.res.getString("Install_date"));
+                
+                Cell datadCell = dataRow.createCell(4);
+                datadCell.setCellValue(connect.res.getString("Due_date"));
+                
+                Cell dataeCell = dataRow.createCell(5);
+                dataeCell.setCellValue(connect.res.getString("Business"));
+                
+                Cell datafCell = dataRow.createCell(6);
+                datafCell.setCellValue(connect.res.getString("Amount_due"));
+                
+                 Cell datagCell = dataRow.createCell(7);
+                datagCell.setCellValue(connect.res.getString("Total_Amount"));
+                
+                Cell datahCell = dataRow.createCell(8);
+                datahCell.setCellValue(connect.res.getString("PONum"));
+            }
+            FileOutputStream fileOut = new FileOutputStream(new File("well"));
+            wb.write(fileOut);
+            fileOut.close();
+            System.out.println("done");
+            
+         }
+         catch(Exception e){
+             System.out.println("darn");
+             
+         }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
