@@ -5,12 +5,25 @@
  */
 package cosc457.finalproject;
 
+import org.apache.commons.io.FileExistsException;
+import org.apache.commons.io.FileUtils;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.*;
+import java.io.*;
+import java.sql.*;
+import java.util.*;
+
 /**
  *
  * @author Kevin
  */
 public class InvoiceSummary extends javax.swing.JFrame {
 
+    static final String userName = "jrajew1";//put your MySQL user name
+    static final String password = "Cosc*2awc";//put your MySQL password
+    Connect connect = new Connect();
     /**
      * Creates new form InvoiceSummary
      */
@@ -30,8 +43,6 @@ public class InvoiceSummary extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
@@ -43,12 +54,6 @@ public class InvoiceSummary extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel1.setText("Invoice Summary");
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel2.setText("Month:");
-
-        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Year:");
@@ -75,41 +80,35 @@ public class InvoiceSummary extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(110, 110, 110)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(49, 49, 49)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(102, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(139, 139, 139))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(111, 111, 111)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(97, 97, 97))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(54, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel2)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(56, 56, 56)
+                .addGap(47, 47, 47)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(62, 62, 62)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton1))
@@ -143,6 +142,85 @@ public class InvoiceSummary extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        
+        //bidsbajkvlbjd
+        
+        try {
+            //String query1 = "select Count(QuoteID), Name, Date, Price, FollowUpDate, `Open/Closed`, Reason, ContactLocation, Awarded from Customer C, Quotes Q where C.`Customer#` = Q.`Customer#` and (Month= ? AND Year=?);";
+            connect.ps = connect.con.prepareStatement("select * from Invoices where year(Install_date) =?;");
+            String s1 = jTextField1.getText();
+            connect.ps.setString(1, s1);
+             connect.res = connect.ps.executeQuery();
+             
+            Workbook wb = new HSSFWorkbook();
+            Sheet personSheet = wb.createSheet("TEST");
+            Row headerRow = personSheet.createRow(0);
+            Cell nameHeaderCell = headerRow.createCell(0);
+            Cell addressHeaderCell = headerRow.createCell(1);
+            
+            int row = 1;
+            int row2=0;
+            Row dataRow2 = personSheet.createRow(row2);
+            Cell dataQuoteCell2 = dataRow2.createCell(0);
+            dataQuoteCell2.setCellValue("Invoice#");
+            Cell dataQuoteaCell2 = dataRow2.createCell(1);
+            dataQuoteaCell2.setCellValue("Customer#");
+            Cell dataQuoteaaCell2 = dataRow2.createCell(2);
+            dataQuoteaaCell2.setCellValue("InventoryID");
+            Cell dataQuoteaaaCell2 = dataRow2.createCell(3);
+            dataQuoteaaaCell2.setCellValue("Install_date");
+            Cell dataQuoteaaaaCell2 = dataRow2.createCell(4);
+            dataQuoteaaaaCell2.setCellValue("Due_date");
+            Cell dataQuoteaaaaaCell2 = dataRow2.createCell(5);
+            dataQuoteaaaaaCell2.setCellValue("Business");
+            Cell dataQuoteaaaaaaCell2 = dataRow2.createCell(6);
+            dataQuoteaaaaaaCell2.setCellValue("Amount_due");
+            Cell dataQuoteaaaaaaaCell2 = dataRow2.createCell(7);
+            dataQuoteaaaaaaaCell2.setCellValue("Total_Amount");
+            Cell dataQuoteaaaaaaaaCell2 = dataRow2.createCell(8);
+            dataQuoteaaaaaaaaCell2.setCellValue("PONum");
+            
+            
+            while (connect.res.next()) {
+                Row dataRow = personSheet.createRow(row);
+
+                Cell dataQuoteCell = dataRow.createCell(0);
+                dataQuoteCell.setCellValue(connect.res.getString("Invoice#"));
+                
+                Cell dataaCell = dataRow.createCell(1);
+                dataaCell.setCellValue(connect.res.getString("Customer#"));
+                
+                Cell databCell = dataRow.createCell(2);
+                databCell.setCellValue(connect.res.getString("InventoryID"));
+                
+                Cell datacCell = dataRow.createCell(3);
+                datacCell.setCellValue(connect.res.getString("Install_date"));
+                
+                Cell datadCell = dataRow.createCell(4);
+                datadCell.setCellValue(connect.res.getString("Due_date"));
+                
+                Cell dataeCell = dataRow.createCell(5);
+                dataeCell.setCellValue(connect.res.getString("Business"));
+                
+                Cell datafCell = dataRow.createCell(6);
+                datafCell.setCellValue(connect.res.getString("Amount_due"));
+                
+                 Cell datagCell = dataRow.createCell(7);
+                datagCell.setCellValue(connect.res.getString("Total_Amount"));
+                
+                Cell datahCell = dataRow.createCell(8);
+                datahCell.setCellValue(connect.res.getString("PONum"));
+            }
+            FileOutputStream fileOut = new FileOutputStream(new File("InvoiceSummary"));
+            wb.write(fileOut);
+            fileOut.close();
+            System.out.println("done");
+            
+         }
+         catch(Exception e){
+             System.out.println("darn");
+             
+         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -189,9 +267,7 @@ public class InvoiceSummary extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
