@@ -120,7 +120,15 @@ public class ModifyCustomer extends javax.swing.JFrame {
             new String [] {
                 "Customer#", "Name"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable2MouseClicked(evt);
@@ -240,7 +248,7 @@ public class ModifyCustomer extends javax.swing.JFrame {
         // TODO add your handling code here:
         try 
         {
-            connect.ps = connect.con.prepareStatement("insert into jrajew1db.Customer values (?, ?)");
+            connect.ps = connect.con.prepareStatement("INSERT INTO jrajew1db.Customer values (?, ?)");
             String s1 = jTextField1.getText();
             String s2 = jTextField2.getText();
             connect.ps.setString(1, s1);
@@ -282,7 +290,7 @@ public class ModifyCustomer extends javax.swing.JFrame {
         {
             String s1 = jTextField1.getText();
             String s2 = jTextField2.getText();
-            
+         
             connect.ps = connect.con.prepareStatement("UPDATE jrajew1db.Customer SET Name='"+s2+"' WHERE `Customer#`=" + Integer.parseInt(s1));
             connect.ps.executeUpdate();
             new ModifyCustomer().setVisible(true);
