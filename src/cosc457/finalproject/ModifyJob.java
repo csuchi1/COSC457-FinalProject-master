@@ -95,7 +95,6 @@ static final String userName = "jrajew1";//put your MySQL user name
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton3 = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         jTextField11 = new javax.swing.JTextField();
         checkbox1 = new java.awt.Checkbox();
@@ -197,9 +196,6 @@ static final String userName = "jrajew1";//put your MySQL user name
             }
         });
         jScrollPane1.setViewportView(jTable1);
-
-        jButton3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton3.setText("Update");
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel13.setText("Color Grade:");
@@ -305,9 +301,7 @@ static final String userName = "jrajew1";//put your MySQL user name
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(64, 64, 64)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(344, 344, 344)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(282, 282, 282)
+                        .addGap(787, 787, 787)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(25, 25, 25)
@@ -377,10 +371,9 @@ static final String userName = "jrajew1";//put your MySQL user name
                 .addComponent(jLabel5)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
-                    .addComponent(jButton3)
                     .addComponent(jButton1))
                 .addGap(33, 33, 33))
         );
@@ -409,7 +402,7 @@ static final String userName = "jrajew1";//put your MySQL user name
         // TODO add your handling code here:
         try 
         {
-            connect.ps = connect.con.prepareStatement("INSERT INTO jrajew1db.Job values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            connect.ps = connect.con.prepareStatement("INSERT INTO jrajew1db.Job VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             String s1 = jTextField1.getText();
             String s2 = jTextField2.getText();
             String s3 = jTextField3.getText();
@@ -471,7 +464,7 @@ static final String userName = "jrajew1";//put your MySQL user name
         try
         {
             connect.stat = connect.con.createStatement();
-            String sql = "select * from jrajew1db.Job where location='"+tableClick+"'";
+            String sql = "SELECT * FROM jrajew1db.Job WHERE location='"+tableClick+"'";
             connect.res = connect.stat.executeQuery(sql);
             
             if(connect.res.next())
@@ -550,7 +543,6 @@ static final String userName = "jrajew1";//put your MySQL user name
     private java.awt.Checkbox checkbox8;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

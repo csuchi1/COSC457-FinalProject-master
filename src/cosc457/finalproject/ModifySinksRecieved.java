@@ -41,25 +41,24 @@ public class ModifySinksRecieved extends javax.swing.JFrame {
     public void showTable(){
         try
         {
-            connect.res = connect.stat.executeQuery("select * from jrajew1db.SinksReceived;");
-            while(connect.res.next() || !connect.res.previous()){
-                String inventoryID  = connect.res.getString(1);
-                System.out.println(inventoryID);
-                String sinkModel = connect.res.getString(2);
-                int qty = connect.res.getInt(3);
-                double cost = connect.res.getDouble(4);
-                //FIX
-                Date dateReceived = format.parse(connect.res.getDate(5).toString());
+            connect.res = connect.stat.executeQuery("SELECT * FROM jrajew1db.SinksReceived;");
+            
+            while(connect.res.next()){
+                String invId = connect.res.getString(1);
+                String sMod = connect.res.getString(2);
+                String cost = connect.res.getString(3);
+                int quan = connect.res.getInt(4);
+                String date = connect.res.getString(5);
                 
-               //Object[] content = {inventoryID, sinkModel, qty, cost, dateReceived};
-               Object[] content = {inventoryID, sinkModel, qty, cost, dateReceived};
+                Object[] content = {invId,sMod, cost, quan, date};
                 
-               DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-               model.addRow(content);
+                DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                model.addRow(content);
             }
         }
-        catch (Exception e){
-            System.out.println(e);
+        catch (Exception e)
+        {
+            
         }
     }
     
@@ -89,6 +88,8 @@ public class ModifySinksRecieved extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton3 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jTextField5 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -165,7 +166,7 @@ public class ModifySinksRecieved extends javax.swing.JFrame {
                 java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, false, true, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -193,48 +194,52 @@ public class ModifySinksRecieved extends javax.swing.JFrame {
             }
         });
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel6.setText("Date Recieved:");
+
+        jTextField5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(70, 70, 70)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel6)
+                                .addComponent(jLabel3)))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
+                            .addComponent(jTextField2)
+                            .addComponent(jTextField5))
+                        .addGap(49, 49, 49)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(222, 222, 222)
-                                .addComponent(jLabel1))
+                                .addComponent(jLabel5)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(70, 70, 70)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel3)
-                                            .addComponent(jLabel2))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
-                                            .addComponent(jTextField2))
-                                        .addGap(49, 49, 49)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(jLabel5)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(jLabel4)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                        .addGap(0, 60, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(107, 107, 107)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                                .addComponent(jLabel4)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(267, 267, 267)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(180, 180, 180))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(232, 232, 232))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -259,14 +264,18 @@ public class ModifySinksRecieved extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
+                    .addComponent(jLabel6)
+                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
+                    .addComponent(jButton3)
                     .addComponent(jButton2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -277,7 +286,7 @@ public class ModifySinksRecieved extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -298,14 +307,16 @@ public class ModifySinksRecieved extends javax.swing.JFrame {
             String s2 = jTextField2.getText();
             String s3 = jTextField3.getText();
             String s4 = jTextField4.getText();
-            LocalDate s5 = LocalDate.now();
-            //UPDATE `jrajew1db`.`SinksReceived` SET `InventoryID`='20', `SinkModel`='Joe ', `Qty`='5', `Cost`='305', `DateReceived`='2017-05-31' WHERE `InventoryID`='30';
-            connect.ps = connect.con.prepareStatement("UPDATE jrajew1db.SinksReceived "
-                    + "SET SinkModel='"+s2+
-                    "', Qty='"+s3+
-                    "', Cost='"+s4+
-                    "', DateReceived='"+s5.getYear()+"-"+s5.getMonthValue()+"-"+s5.getDayOfMonth()+
-                    "'  WHERE `InventoryID`=" + s1);
+            String s5 = jTextField5.getText();
+            
+            
+            connect.ps = connect.con.prepareStatement("UPDATE jrajew1db.SinksReceived SET sinkmodel = ?, qty = ?, cost = ?, datereceived = ? WHERE inventoryid = ?");
+            connect.ps.setString(1, s2);
+            connect.ps.setString(2, s3);
+            connect.ps.setString(3, s4);
+            connect.ps.setString(4, s5);
+            connect.ps.setString(5, s1);
+            
             connect.ps.executeUpdate();
             new ModifySinksRecieved().setVisible(true);
             this.dispose();
@@ -325,6 +336,12 @@ public class ModifySinksRecieved extends javax.swing.JFrame {
             String s2 = jTextField2.getText();
             String s3 = jTextField3.getText();
             String s4 = jTextField4.getText();
+            String s5 = jTextField5.getText();
+            
+            String startDate= s5;
+            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-mm-dd");
+            java.util.Date date = sdf1.parse(startDate);
+            java.sql.Date sqlStartDate = new java.sql.Date(date.getTime());  
 //            connect.ps.setString(1, s1);
 //            connect.ps.executeUpdate();
             
@@ -332,12 +349,9 @@ public class ModifySinksRecieved extends javax.swing.JFrame {
             connect.ps.setString(1, s1);
             connect.ps.setString(2, s2);
             connect.ps.setString(3, s3);
-            connect.ps.setString(4, s4);
-            //FIX
-            LocalDate local = LocalDate.now();
-            Date date = new java.sql.Date(local.getYear(), local.getMonthValue(), local.getDayOfMonth());
-            System.out.println(date.toString());
-            connect.ps.setDate(5, new java.sql.Date(local.getYear(), local.getMonthValue(), local.getDayOfMonth()));
+            connect.ps.setInt(4, Integer.parseInt(s4));
+            connect.ps.setDate(5, sqlStartDate);
+            
             connect.ps.executeUpdate();
             new ModifySinksRecieved().setVisible(true);
             this.dispose();
@@ -365,29 +379,6 @@ public class ModifySinksRecieved extends javax.swing.JFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
-        // method for clicking on an entry to populate the fields
-        int row = jTable1.getSelectedRow();
-        //this gets the primary key, since the first column is InventoryID
-        //then queries for the primary key
-//        try
-//        {
-//            connect.stat = connect.con.createStatement();
-//            String sql = "select * from jrajew1db.SinksReceived where name='"+tableClick+"'";
-//            connect.res = connect.stat.executeQuery(sql);
-//            
-//            if(connect.res.next())
-//            {
-                jTextField1.setText(jTable1.getModel().getValueAt(row, 0).toString());
-                jTextField2.setText(jTable1.getModel().getValueAt(row, 1).toString());
-                jTextField3.setText(jTable1.getModel().getValueAt(row, 2).toString());
-                jTextField4.setText(jTable1.getModel().getValueAt(row, 3).toString());
-                //jTextField5.setText(jTable1.getModel().getValueAt(row, 4).toString());
-//            }
-//        }
-//        catch(SQLException e)
-//        {
-//            
-//        }
     }//GEN-LAST:event_jTable1MouseClicked
 
     /**
@@ -435,6 +426,7 @@ public class ModifySinksRecieved extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
@@ -442,5 +434,6 @@ public class ModifySinksRecieved extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
 }

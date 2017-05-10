@@ -106,6 +106,8 @@ public class ModifyCustomerRevenue extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setText("Revenue");
 
+        jTextField4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton1.setText("Back");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -188,10 +190,10 @@ public class ModifyCustomerRevenue extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(47, 47, 47)
                                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(40, 40, 40)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 585, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -229,7 +231,7 @@ public class ModifyCustomerRevenue extends javax.swing.JFrame {
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton3)
@@ -271,13 +273,14 @@ public class ModifyCustomerRevenue extends javax.swing.JFrame {
         // TODO add your handling code here:
         try 
         {
-            connect.ps = connect.con.prepareStatement("insert into jrajew1db.CustomerRevenue values (?, ?)");
+            connect.ps = connect.con.prepareStatement("INSERT INTO jrajew1db.CustomerRevenue VALUES (?, ?, ?, ?, ?)");
             String s1 = jTextField5.getText();
             String s2 = jTextField1.getText();
             String s3 = jTextField2.getText();
             String s4 = jTextField3.getText();
             String s5 = jTextField4.getText();
-            connect.ps.setString(1, s1);
+            int x = Integer.parseInt(s1);
+            connect.ps.setInt(1, x);
             connect.ps.setString(2, s2);
             connect.ps.setString(3, s3);
             connect.ps.setString(4, s4);
@@ -288,7 +291,7 @@ public class ModifyCustomerRevenue extends javax.swing.JFrame {
             this.dispose();
         }
         catch(Exception e) {
-            System.out.println("FAIL");
+            System.out.println(e);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
