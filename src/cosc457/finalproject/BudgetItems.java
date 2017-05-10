@@ -5,11 +5,25 @@
  */
 package cosc457.finalproject;
 
+import org.apache.commons.io.FileExistsException;
+import org.apache.commons.io.FileUtils;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.*;
+import java.io.*;
+import java.sql.*;
+import java.util.*;
+
 /**
  *
  * @author Kevin
  */
 public class BudgetItems extends javax.swing.JFrame {
+
+    static final String userName = "jrajew1";//put your MySQL user name
+    static final String password = "Cosc*2awc";//put your MySQL password
+    Connect connect = new Connect();
 
     /**
      * Creates new form BudgetItems
@@ -48,6 +62,11 @@ public class BudgetItems extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton1.setText("Generate");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton2.setText("Back");
@@ -111,6 +130,47 @@ public class BudgetItems extends javax.swing.JFrame {
         new Reports().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        //bsdfoahbjwdb
+        try {
+            connect.ps = connect.con.prepareStatement("SELECT * FROM CustomerRevenue where Year=?;");
+            String s1 = jTextField1.getText();
+            connect.ps.setString(1, s1);
+            connect.res = connect.ps.executeQuery();
+
+            Workbook wb = new HSSFWorkbook();
+            Sheet personSheet = wb.createSheet("TEST");
+            Row headerRow = personSheet.createRow(0);
+            Cell nameHeaderCell = headerRow.createCell(0);
+            Cell addressHeaderCell = headerRow.createCell(1);
+            
+            int row = 1;
+            int row2=0;
+            Row dataRow2 = personSheet.createRow(row2);
+            Cell dataQuoteCell2 = dataRow2.createCell(0);
+            dataQuoteCell2.setCellValue("CustomerNo#");
+            Cell dataQuoteaCell2 = dataRow2.createCell(1);
+            dataQuoteaCell2.setCellValue("RevenueAmount#");
+             while (connect.res.next()) {
+                Row dataRow = personSheet.createRow(row);
+
+                Cell dataQuoteCell = dataRow.createCell(0);
+                dataQuoteCell.setCellValue(connect.res.getString("CustomerNo"));
+                
+                Cell dataaCell = dataRow.createCell(1);
+                dataaCell.setCellValue(connect.res.getString("RevenueAmount"));
+             }
+            FileOutputStream fileOut = new FileOutputStream(new File("BudgetItems"));
+            wb.write(fileOut);
+            fileOut.close();
+            System.out.println("done");
+            
+        } catch (Exception e) {
+            System.out.println("ppppppppp");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
