@@ -248,7 +248,7 @@ public class ModifyCustomer extends javax.swing.JFrame {
         // TODO add your handling code here:
         try 
         {
-            connect.ps = connect.con.prepareStatement("INSERT INTO jrajew1db.Customer values (?, ?)");
+            connect.ps = connect.con.prepareStatement("INSERT INTO jrajew1db.Customer VALUES (?, ?)");
             String s1 = jTextField1.getText();
             String s2 = jTextField2.getText();
             connect.ps.setString(1, s1);
