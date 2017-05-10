@@ -49,6 +49,11 @@ public class Reports extends javax.swing.JFrame implements ActionListener
 
         jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ABS Follow Up Quotes", "Budget Items", "Inventory List", "Invoice Summary", "Schedule Total Jobs", "Supplier Invoices" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton1.setText("Submit");
@@ -157,12 +162,16 @@ public class Reports extends javax.swing.JFrame implements ActionListener
             new ScheduleTotalJobs().setVisible(true);
             this.setVisible(false);
         }
-        else if(selected.toString().equals("Supplier Invoices"))
-        {
-            new SupplierInvoices().setVisible(true);
-            this.setVisible(false);
-        }
+//        else if(selected.toString().equals("Supplier Invoices"))
+//        {
+//            new SupplierInvoices().setVisible(true);
+//            this.setVisible(false);
+//        }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments

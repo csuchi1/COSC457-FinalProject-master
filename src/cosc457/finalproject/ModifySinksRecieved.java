@@ -58,7 +58,9 @@ public class ModifySinksRecieved extends javax.swing.JFrame {
                model.addRow(content);
             }
         }
-        catch (Exception e){}
+        catch (Exception e){
+            System.out.println(e);
+        }
     }
     
     
@@ -162,9 +164,16 @@ public class ModifySinksRecieved extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, true, false, true, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jTable1.getTableHeader().setReorderingAllowed(false);
@@ -290,7 +299,6 @@ public class ModifySinksRecieved extends javax.swing.JFrame {
             String s3 = jTextField3.getText();
             String s4 = jTextField4.getText();
             LocalDate s5 = LocalDate.now();
-            System.out.println(s5);
             //UPDATE `jrajew1db`.`SinksReceived` SET `InventoryID`='20', `SinkModel`='Joe ', `Qty`='5', `Cost`='305', `DateReceived`='2017-05-31' WHERE `InventoryID`='30';
             connect.ps = connect.con.prepareStatement("UPDATE jrajew1db.SinksReceived "
                     + "SET SinkModel='"+s2+
@@ -304,7 +312,6 @@ public class ModifySinksRecieved extends javax.swing.JFrame {
         }
         catch(Exception e)
         {
-            // System.out.println("FAILED TO UPDATE");
             System.out.println(e);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -313,25 +320,30 @@ public class ModifySinksRecieved extends javax.swing.JFrame {
 
         try 
         {
-            connect.ps = connect.con.prepareStatement("insert into jrajew1db.SinksReceived values ('?', '?', '?', '?', '?');");
+//            connect.ps = connect.con.prepareStatement("insert into jrajew1db.Inventory values (?, 'not set', 'not set');");
             String s1 = jTextField1.getText();
             String s2 = jTextField2.getText();
             String s3 = jTextField3.getText();
             String s4 = jTextField4.getText();
+//            connect.ps.setString(1, s1);
+//            connect.ps.executeUpdate();
             
+            connect.ps = connect.con.prepareStatement("insert into jrajew1db.SinksReceived values (?, ?, ?, ?, ?);");
             connect.ps.setString(1, s1);
             connect.ps.setString(2, s2);
             connect.ps.setString(3, s3);
             connect.ps.setString(4, s4);
             //FIX
             LocalDate local = LocalDate.now();
+            Date date = new java.sql.Date(local.getYear(), local.getMonthValue(), local.getDayOfMonth());
+            System.out.println(date.toString());
             connect.ps.setDate(5, new java.sql.Date(local.getYear(), local.getMonthValue(), local.getDayOfMonth()));
             connect.ps.executeUpdate();
             new ModifySinksRecieved().setVisible(true);
             this.dispose();
         }
         catch(Exception e) {
-            System.out.println("FAIL");
+            System.out.println(e);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -357,8 +369,6 @@ public class ModifySinksRecieved extends javax.swing.JFrame {
         int row = jTable1.getSelectedRow();
         //this gets the primary key, since the first column is InventoryID
         //then queries for the primary key
-        String tableClick = jTable1.getModel().getValueAt(row, 1).toString();
-        
 //        try
 //        {
 //            connect.stat = connect.con.createStatement();

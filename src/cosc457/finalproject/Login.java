@@ -177,9 +177,9 @@ public class Login extends javax.swing.JFrame {
         newInstance = Class.forName("com.mysql.jdbc.Driver").newInstance();
         connection = DriverManager.getConnection("jdbc:mysql://triton.towson.edu:3360/jrajew1db", userName, password);// Please use your database name here
         PreparedStatement updateP;
-       // Statement queryStatement = connection.createStatement();
-        //updateP = null;
-       // String querys = "select * from jrajew1db.Customer;";
+       Statement queryStatement = connection.createStatement();
+       updateP = null;
+        String querys = "set foreign_key_checks=0";
        // ResultSet results = queryStatement.executeQuery(querys);
         //while (results.next()) {
        //     System.out.print(results.getString("Customer#"));
@@ -188,8 +188,8 @@ public class Login extends javax.swing.JFrame {
         //    System.out.println();
       //  }
         //querys = "UPDATE csuchi1db.P SET pname = 'Test' WHERE pname = 'Nut';";
-        //updateP = connection.prepareStatement(querys);
-        //updateP.executeUpdate();
+       updateP = connection.prepareStatement(querys);
+       updateP.executeUpdate();
 
         
     }
