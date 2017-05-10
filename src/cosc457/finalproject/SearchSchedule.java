@@ -5,17 +5,96 @@
  */
 package cosc457.finalproject;
 
+import static cosc457.finalproject.NetBeans_connection_test.userName;
+import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.Vector;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Kevin
  */
 public class SearchSchedule extends javax.swing.JFrame {
 
-    /**
-     * Creates new form SearchSchedule
-     */
+    static final String userName = "jrajew1";//put your MySQL user name
+    static final String password = "Cosc*2awc";//put your MySQL password
+    Connect connect = new Connect();
+    
     public SearchSchedule() {
         initComponents();
+        showTable();
+    }
+
+    public void showTable() {
+        try {
+
+            deleteAllRows();
+
+            connect.stat = connect.con.createStatement();
+            String sy1 = jTextField1.getText().trim();
+            String sm1 = jComboBox1.getSelectedItem().toString();
+            String sy2 = jTextField2.getText().trim();
+            String sm2 = jComboBox2.getSelectedItem().toString();
+            
+            System.out.print(sy1);
+            System.out.print(sy2);
+            System.out.print(sm1);
+            System.out.print(sm2);
+            
+            String s2 = "SELECT Date, Employee, `Function`, Inventory.InventoryID, Job.JobName, Location, SqaureFeet, Edge, Time, `Color/Grade`, `Granite/Quartz`, `Granite/Quartz_Repair`, SolidSurfaces, SolidSurfaces_Repair, L_Install, Cabinet, `Dropoff/Pickups`, Tile\n" +
+"FROM Job, Inventory\n" +
+"WHERE Job.JobName = Inventory.JobName";
+
+            String s3 = " and (Job.Date between'"+sy1+"/"+sm1+"/1' and '"+sy2+"/"+sm2+"/31')\n" +
+"order by Job.`Date` DESC;";
+            if (null != sy1) {
+                s2 = s2.concat(s3);
+            }
+            System.out.print(s2);
+
+            connect.res = connect.stat.executeQuery(s2);
+        } catch (Exception e) {
+            System.out.println(e.getStackTrace());
+        }
+        try {
+            while (connect.res.next()) {
+                String Date = connect.res.getString(1);
+                String Employee = connect.res.getString(2);
+                String Function = connect.res.getString(3);
+                String InventoryID = connect.res.getString(4);
+                String JobName = connect.res.getString(5);
+                String Location = connect.res.getString(6);
+                String SquareFeet = connect.res.getString(7);
+                String Edge = connect.res.getString(8);
+                String Time = connect.res.getString(9);
+                String ColorGrade = connect.res.getString(10);
+                String GraniteQuartz = connect.res.getString(11);
+                String GraniteQuartz_Repair = connect.res.getString(12);
+                String SolidSurfaces = connect.res.getString(13);
+                String SolidSurfaces_Repair = connect.res.getString(14);
+                String L_Install = connect.res.getString(15);
+                String Cabinet = connect.res.getString(16);
+                String DropoffPickups = connect.res.getString(17);
+                String Tile = connect.res.getString(18);
+
+                Object[] content = {Date, Employee, Function, InventoryID, JobName, Location, SquareFeet, Edge, Time, ColorGrade, GraniteQuartz, GraniteQuartz_Repair, 
+                    SolidSurfaces, SolidSurfaces_Repair, L_Install, Cabinet, DropoffPickups, Tile};
+
+                DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                model.addRow(content);
+
+            }
+            connect.ps.executeQuery();
+            new CustomerSearch().setVisible(true);
+            this.dispose();
+        } catch (Exception e) {
+            System.out.println(e.getStackTrace());
+        }
+
     }
 
     /**
@@ -33,7 +112,6 @@ public class SearchSchedule extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox();
@@ -55,21 +133,32 @@ public class SearchSchedule extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("From:");
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton1.setText("Search");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-
+                "Date", "Employee", "Function", "InventoryID", "JobName", "Location", "SquareFeet", "Edge", "Time", "Color/Grade", "G&Q", "G&Q Repair", "SS", "SS Repair", "L_Install", "Cabinet", "Dropoff/Pickup", "Tile"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
+            };
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton2.setText("Export");
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        jScrollPane1.setViewportView(jTable1);
 
         jButton3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton3.setText("Back");
@@ -83,7 +172,12 @@ public class SearchSchedule extends javax.swing.JFrame {
         jLabel3.setText("Month:");
 
         jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("Year:");
@@ -97,7 +191,7 @@ public class SearchSchedule extends javax.swing.JFrame {
         jLabel6.setText("Month:");
 
         jComboBox2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
         jComboBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox2ActionPerformed(evt);
@@ -143,17 +237,14 @@ public class SearchSchedule extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(41, 41, 41)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 690, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(246, 246, 246)
+                        .addGap(102, 102, 102)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(135, 135, 135)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(43, Short.MAX_VALUE))
         );
@@ -179,14 +270,12 @@ public class SearchSchedule extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addComponent(jLabel5))
                         .addGap(31, 31, 31)))
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(31, 31, 31)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(jButton3)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -214,6 +303,20 @@ public class SearchSchedule extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        showTable();
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    public void deleteAllRows() {
+                        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                        model.setRowCount(0);
+    }
     /**
      * @param args the command line arguments
      */
@@ -251,7 +354,6 @@ public class SearchSchedule extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
