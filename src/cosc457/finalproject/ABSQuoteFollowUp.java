@@ -160,17 +160,10 @@ public class ABSQuoteFollowUp extends javax.swing.JFrame {
         // TODO add your handling code here:
         //gernerate the report 
         try {
-            //String query1 = "select Count(QuoteID), Name, Date, Price, FollowUpDate, `Open/Closed`, Reason, ContactLocation, Awarded from Customer C, Quotes Q where C.`Customer#` = Q.`Customer#` and (Month= ? AND Year=?);";
-            connect.ps = connect.con.prepareStatement("select count(QuoteID), Name \n" +
-"from jrajew1db.Customer C, jrajew1db.Quotes Q \n" +
-"where C.`Customer#` = Q.`Customer#` and (Month(Date)=? AND Year(Date)=?);");
-            //, Name, Date, Price, FollowUpDate, `Open/Closed`, Reason, ContactLocation, Awarded
-            String s1 = jComboBox1.getSelectedItem().toString();
-            String s2 = jTextField1.getText();
+            connect.ps = connect.con.prepareStatement("select * from jrajew1db.Customer C, jrajew1db.Quotes Q where C.`Customer#` = Q.`Customer#` and Year(Date)=?;");
+            String s1 = jTextField1.getText();
             connect.ps.setString(1, s1);
-            connect.ps.setString(2, s2);
             connect.res = connect.ps.executeQuery();
-            //connect.ps.executeQuery();
             
             
 
@@ -181,6 +174,21 @@ public class ABSQuoteFollowUp extends javax.swing.JFrame {
             Cell addressHeaderCell = headerRow.createCell(1);
         
             int row = 1;
+            int row2=0;
+            Row dataRow2 = personSheet.createRow(row2);
+            Cell dataQuoteCell2 = dataRow2.createCell(0);
+            dataQuoteCell2.setCellValue("Customer#");
+            Cell dataQuoteaCell2 = dataRow2.createCell(1);
+            dataQuoteaCell2.setCellValue("Name");
+            Cell dataQuoteaaCell2 = dataRow2.createCell(2);
+            dataQuoteaaCell2.setCellValue("QuoteID");
+            Cell dataQuoteaaaCell2 = dataRow2.createCell(3);
+            dataQuoteaaaCell2.setCellValue("FollowUpDate");
+             Cell dataQuoteaaaaCell2 = dataRow2.createCell(4);
+            dataQuoteaaaaCell2.setCellValue("Price");
+             Cell dataQuoteaaaaaCell2 = dataRow2.createCell(5);
+            dataQuoteaaaaaCell2.setCellValue("Awarded");
+            
             while (connect.res.next()) {
                 //Row dataRow = personSheet.createRow(row);
                 //Cell dataNameCell = dataRow.createCell(1);
@@ -197,11 +205,38 @@ public class ABSQuoteFollowUp extends javax.swing.JFrame {
                 Row dataRow = personSheet.createRow(row);
 
                 Cell dataQuoteCell = dataRow.createCell(0);
-                dataQuoteCell.setCellValue(connect.res.getString("count(QuoteID)"));
-
-                Cell dataNameCell = dataRow.createCell(1);
-                dataNameCell.setCellValue(connect.res.getString("Name"));
-
+                dataQuoteCell.setCellValue(connect.res.getString("Customer#"));
+                
+                Cell dataaCell = dataRow.createCell(1);
+                dataaCell.setCellValue(connect.res.getString("Name"));
+                
+                Cell dataaaCell = dataRow.createCell(2);
+                dataaaCell.setCellValue(connect.res.getString("QuoteID"));
+                
+                
+                Cell dataaaaaCell = dataRow.createCell(3);
+                dataaaaaCell.setCellValue(connect.res.getString("FollowUpDate"));
+                
+                Cell dataaaaaaaaCell = dataRow.createCell(4);
+                dataaaaaaaaCell.setCellValue(connect.res.getString("Price"));
+                
+                Cell dataaaaaaCell = dataRow.createCell(5);
+                dataaaaaaCell.setCellValue(connect.res.getString("Awarded"));
+                
+                /*Cell dataaaaaaCell = dataRow.createCell(4);
+                dataaaaaaCell.setCellValue(connect.res.getString("Awarded"));
+                
+                   Cell dataaaaaaaCell = dataRow.createCell(5);
+                dataaaaaaaCell.setCellValue(connect.res.getString("Reason"));
+                
+                 Cell dataaaaaaaaCell = dataRow.createCell(6);
+                dataaaaaaaaCell.setCellValue(connect.res.getString("Price"));
+                
+                 Cell dataaaaaaaaaCell = dataRow.createCell(7);
+                dataaaaaaaaaCell.setCellValue(connect.res.getString("ContractLocation"));
+                
+                   Cell dataaaaaaaaaaCell = dataRow.createCell(8);
+                dataaaaaaaaaaCell.setCellValue(connect.res.getString("Date"));*/
                 /*Cell dataDateCell = dataRow.createCell(2);
                 dataDateCell.setCellValue(connect.res.getString("Date"));
 
@@ -284,3 +319,43 @@ public class ABSQuoteFollowUp extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
+/*
+try {
+            connect.ps = connect.con.prepareStatement("SELECT * FROM CustomerRevenue where Year=?;");
+            String s1 = jTextField1.getText();
+            connect.ps.setString(1, s1);
+            connect.res = connect.ps.executeQuery();
+
+            Workbook wb = new HSSFWorkbook();
+            Sheet personSheet = wb.createSheet("TEST");
+            Row headerRow = personSheet.createRow(0);
+            Cell nameHeaderCell = headerRow.createCell(0);
+            Cell addressHeaderCell = headerRow.createCell(1);
+            
+            int row = 1;
+            int row2=0;
+            Row dataRow2 = personSheet.createRow(row2);
+            Cell dataQuoteCell2 = dataRow2.createCell(0);
+            dataQuoteCell2.setCellValue("CustomerNo#");
+            Cell dataQuoteaCell2 = dataRow2.createCell(1);
+            dataQuoteaCell2.setCellValue("RevenueAmount#");
+             while (connect.res.next()) {
+                Row dataRow = personSheet.createRow(row);
+
+                Cell dataQuoteCell = dataRow.createCell(0);
+                dataQuoteCell.setCellValue(connect.res.getString("CustomerNo"));
+                
+                Cell dataaCell = dataRow.createCell(1);
+                dataaCell.setCellValue(connect.res.getString("RevenueAmount"));
+             }
+            FileOutputStream fileOut = new FileOutputStream(new File("BudgetItems"));
+            wb.write(fileOut);
+            fileOut.close();
+            System.out.println("done");
+            
+        } catch (Exception e) {
+            System.out.println("ppppppppp");
+        }
+
+
+*/

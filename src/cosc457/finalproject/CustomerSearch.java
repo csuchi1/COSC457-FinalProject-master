@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Kevin
@@ -22,39 +23,49 @@ public class CustomerSearch extends javax.swing.JFrame {
     static final String userName = "jrajew1";//put your MySQL user name
     static final String password = "Cosc*2awc";//put your MySQL password
     Connect connect = new Connect();
+    
+
     /**
      * Creates new form CustomerSearch
      */
     public CustomerSearch() {
         initComponents();
         showTable();
-        
+
     }
-  
-    public void showTable()
-    {
-        try
-        {
+
+    public void showTable() {
+        try {
+
+            deleteAllRows();
+
             connect.stat = connect.con.createStatement();
-            String s1 = jTextField2.getText();
-            String s2 = "select Customer.`Customer#`, Customer.`Name`, Job.JobName,Job.Location,Job.`Function`,Job.Edge,Job.`Date`, Job.`Color/Grade`, \n" +
-"Job.`Granite/Quartz`, Job.`Granite/Quartz_Repair`,\n" +
-"Job.SolidSurfaces, Job.SolidSurfaces_Repair, Job.L_Install, Job.Cabinet, Job.`Dropoff/Pickups`, Job.Tile,\n" +
-"Quotes.QuoteID, Quotes.FollowUpDate, Quotes.Awarded, Quotes.Reason, Quotes.Price, Quotes.ContactLocation, \n" +
-"Quotes.`Date`, Quotes.`Open/Closed`, Inventory.InventoryID, Invoices.`Invoice#`, Invoices.Install_date, Invoices.Due_date, Invoices.Check_Date,\n" +
-"Invoices.Business, Invoices.Amount_due, Invoices.Total_Amount, Invoices.`PONum`\n" +
-"from Customer \n" +
-"join Invoices on Customer.`Customer#`=Invoices.`Customer#`\n" +
-"join Inventory on Invoices.`Invoice#`=Inventory.`Invoice#`\n" +
-"join Job on Invoices.`Invoice#`=Job.`Invoice#` \n" +
-"join Quotes on Customer.`Customer#` = Quotes.`Customer#` where Customer.Name like '%"+s1+"%'";
+            String s1 = jTextField2.getText().trim();
+            System.out.print(s1);
+            String s2 = "select Customer.`Customer#`, Customer.`Name`, Job.JobName,Job.Location,Job.`Function`,Job.Edge,Job.`Date`, Job.`Color/Grade`, \n"
+                    + "Job.`Granite/Quartz`, Job.`Granite/Quartz_Repair`,\n"
+                    + "Job.SolidSurfaces, Job.SolidSurfaces_Repair, Job.L_Install, Job.Cabinet, Job.`Dropoff/Pickups`, Job.Tile,\n"
+                    + "Quotes.QuoteID, Quotes.FollowUpDate, Quotes.Awarded, Quotes.Reason, Quotes.Price, Quotes.ContactLocation, \n"
+                    + "Quotes.`Date`, Quotes.`Open/Closed`, Inventory.InventoryID, Invoices.`Invoice#`, Invoices.Install_date, Invoices.Due_date, Invoices.Check_Date,\n"
+                    + "Invoices.Business, Invoices.Amount_due, Invoices.Total_Amount, Invoices.`PONum`\n"
+                    + "from Customer \n"
+                    + "join Invoices on Customer.`Customer#`=Invoices.`Customer#`\n"
+                    + "join Inventory on Invoices.`Invoice#`=Inventory.`Invoice#`\n"
+                    + "join Job on Invoices.`Invoice#`=Job.`Invoice#` \n"
+                    + "join Quotes on Customer.`Customer#` = Quotes.`Customer#`";
+
+            String s3 = " where Customer.Name like '%" + s1 + "%'";
+            if (null != s1) {
+                s2 = s2.concat(s3);
+            }
+            System.out.print(s2);
+
             connect.res = connect.stat.executeQuery(s2);
-        }catch(Exception e)
-        {
-         System.out.println("yup");   
+        } catch (Exception e) {
+            System.out.println(e.getStackTrace());
         }
-             try{
- while(connect.res.next()){
+        try {
+            while (connect.res.next()) {
                 String CustomerNum = connect.res.getString(1);
                 String Customer_Name = connect.res.getString(2);
                 String JobName = connect.res.getString(3);
@@ -88,26 +99,24 @@ public class CustomerSearch extends javax.swing.JFrame {
                 String Amount_Due = connect.res.getString(31);
                 String Total_Amount = connect.res.getString(32);
                 String PONum = connect.res.getString(33);
-                
-                Object[] content = {CustomerNum, Customer_Name, JobName,JobLocation,Function, Edge, JobDate, ColorGrade, GraniteQuartz,GraniteQuartzR, SS, 
-                    SS_R, L_Install, Cabinet, DropPickup, Tile, QuoteID, FollowUpDate, Awarded, Reason, Price, ContactLocation, QuoteDate, OpenClosed, 
-                InventoryID, InvoiceNum, Install_date, Due_Date, Check_Date, Business, Amount_Due, Total_Amount, PONum};
-                
+
+                Object[] content = {CustomerNum, Customer_Name, JobName, JobLocation, Function, Edge, JobDate, ColorGrade, GraniteQuartz, GraniteQuartzR, SS,
+                    SS_R, L_Install, Cabinet, DropPickup, Tile, QuoteID, FollowUpDate, Awarded, Reason, Price, ContactLocation, QuoteDate, OpenClosed,
+                    InventoryID, InvoiceNum, Install_date, Due_Date, Check_Date, Business, Amount_Due, Total_Amount, PONum};
+
                 DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
                 model.addRow(content);
-            
+
             }
             connect.ps.executeQuery();
             new CustomerSearch().setVisible(true);
             this.dispose();
+        } catch (Exception e) {
+            System.out.println(e.getStackTrace());
         }
-        catch(Exception e)
-        {
-         System.out.println("eror212");   
-        }
-        
-        
+
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -155,14 +164,25 @@ public class CustomerSearch extends javax.swing.JFrame {
         jTextField2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jTextField2.setText(" ");
 
+        jScrollPane2.setAutoscrolls(true);
+
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Name", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8", "Title 9", "Title 10", "Title 11", "Title 12", "Title 13", "Title 14", "Title 15", "Title 16", "Title 17", "Title 18", "Title 19", "Title 20", "Title 21", "Title 22", "Title 23", "Title 24", "Title 25", "Title 26", "Title 27", "Title 28", "Title 29", "Title 30", "Title 31", "Title 32", "Title 33"
+                "Customer#", "Customer Name", "Job Name", "Job Location", "Function", "Edge", "Job Date", "Color/Grade", "G&Q", "G&Q Repair", "SS", "SS Repair", "L Install", "Cabinet", "Dropoff/Pickup", "Tile", "QuoteID", "Follow-up Date", "Awarded", "Reason", "Price", "Contact/Location", "Quote Date", "Open/Closed", "Inventory ID", "Invoice#", "Install Date", "Due Date", "Check Date", "Business", "Amount Due", "Total Amount", "PO#"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jScrollPane2.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -225,85 +245,6 @@ public class CustomerSearch extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // Search Button TODO add your handling code here:
-        //showTable();
- 	/**
-        try
-        {
-            String s2 = jTextField2.getText();
-            
-            connect.ps = connect.con.prepareStatement("select Customer.`Customer#`, Customer.`Name`, Job.JobName,Job.Location,Job.`Function`,Job.Edge,Job.`Date`, Job.`Color/Grade`, \n" +
-"Job.`Granite/Quartz`, Job.`Granite/Quartz_Repair`,\n" +
-"Job.SolidSurfaces, Job.SolidSurfaces_Repair, Job.L_Install, Job.Cabinet, Job.`Dropoff/Pickups`, Job.Tile,\n" +
-"Quotes.QuoteID, Quotes.FollowUpDate, Quotes.Awarded, Quotes.Reason, Quotes.Price, Quotes.ContactLocation, \n" +
-"Quotes.`Date`, Quotes.`Open/Closed`, Inventory.InventoryID, Invoices.`Invoice#`, Invoices.Install_date, Invoices.Due_date, Invoices.Check_Date,\n" +
-"Invoices.Business, Invoices.Amount_due, Invoices.Total_Amount, Invoices.`PONum`\n" +
-"from Customer \n" +
-"join Invoices on Customer.`Customer#`=Invoices.`Customer#`\n" +
-"join Inventory on Invoices.`Invoice#`=Inventory.`Invoice#`\n" +
-"join Job on Invoices.`Invoice#`=Job.`Invoice#` \n" +
-"join Quotes on Customer.`Customer#` = Quotes.`Customer#`\n" +
-"where Customer.`Name`like '%"+s2+"%'");
-
-            connect.ps.executeQuery();
-            new CustomerSearch().setVisible(true);
-            this.dispose();
-        }
-        catch(Exception e)
-        {
-         System.out.println(e);   
-        }
-            /**
-            while(connect.res.next()){
-                String CustomerNum = connect.res.getString(1);
-                String Customer_Name = connect.res.getString(2);
-                String JobName = connect.res.getString(3);
-                String JobLocation = connect.res.getString(4);
-                String Function = connect.res.getString(5);
-                String Edge = connect.res.getString(6);
-                String JobDate = connect.res.getString(7);
-                String ColorGrade = connect.res.getString(8);
-                String GraniteQuartz = connect.res.getString(9);
-                String GraniteQuartzR = connect.res.getString(10);
-                String SS = connect.res.getString(11);
-                String SS_R = connect.res.getString(12);
-                String L_Install = connect.res.getString(13);
-                String Cabinet = connect.res.getString(14);
-                String DropPickup = connect.res.getString(15);
-                String Tile = connect.res.getString(16);
-                String QuoteID = connect.res.getString(17);
-                String FollowUpDate = connect.res.getString(18);
-                String Awarded = connect.res.getString(19);
-                String Reason = connect.res.getString(20);
-                String Price = connect.res.getString(21);
-                String ContactLocation = connect.res.getString(22);
-                String QuoteDate = connect.res.getString(23);
-                String OpenClosed = connect.res.getString(24);
-                String InventoryID = connect.res.getString(25);
-                String InvoiceNum = connect.res.getString(26);
-                String Install_date = connect.res.getString(27);
-                String Due_Date = connect.res.getString(28);
-                String Check_Date = connect.res.getString(29);
-                String Business = connect.res.getString(30);
-                String Amount_Due = connect.res.getString(31);
-                String Total_Amount = connect.res.getString(32);
-                String PONum = connect.res.getString(33);
-                
-                Object[] content = {CustomerNum, Customer_Name, JobName,JobLocation,Function, Edge, JobDate, ColorGrade, GraniteQuartz,GraniteQuartzR, SS, 
-                    SS_R, L_Install, Cabinet, DropPickup, Tile, QuoteID, FollowUpDate, Awarded, Reason, Price, ContactLocation, QuoteDate, OpenClosed, 
-                InventoryID, InvoiceNum, Install_date, Due_Date, Check_Date, Business, Amount_Due, Total_Amount, PONum};
-                
-                DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-                model.addRow(content);
-                
-            }
-        }
-        catch(Exception e)
-        {
-            // System.out.println("FAILED TO UPDATE");
-            System.out.println(e);
-        }
-         **/         
         showTable();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -312,6 +253,11 @@ public class CustomerSearch extends javax.swing.JFrame {
         new Menu().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    public void deleteAllRows() {
+                        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                        model.setRowCount(0);
+    }
 
     /**
      * @param args the command line arguments
