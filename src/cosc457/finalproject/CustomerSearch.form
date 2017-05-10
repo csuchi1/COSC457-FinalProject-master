@@ -144,6 +144,9 @@
           </Properties>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+          <Properties>
+            <Property name="autoscrolls" type="boolean" value="true"/>
+          </Properties>
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
@@ -151,41 +154,42 @@
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="33" rowCount="0">
-                    <Column editable="true" title="ID" type="java.lang.Object"/>
-                    <Column editable="true" title="Name" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 3" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 4" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 5" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 6" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 7" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 8" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 9" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 10" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 11" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 12" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 13" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 14" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 15" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 16" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 17" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 18" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 19" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 20" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 21" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 22" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 23" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 24" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 25" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 26" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 27" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 28" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 29" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 30" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 31" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 32" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 33" type="java.lang.Object"/>
+                    <Column editable="false" title="Customer#" type="java.lang.Object"/>
+                    <Column editable="false" title="Customer Name" type="java.lang.Object"/>
+                    <Column editable="false" title="Job Name" type="java.lang.Object"/>
+                    <Column editable="false" title="Job Location" type="java.lang.Object"/>
+                    <Column editable="false" title="Function" type="java.lang.Object"/>
+                    <Column editable="false" title="Edge" type="java.lang.Object"/>
+                    <Column editable="false" title="Job Date" type="java.lang.Object"/>
+                    <Column editable="false" title="Color/Grade" type="java.lang.Object"/>
+                    <Column editable="false" title="G&amp;Q" type="java.lang.Object"/>
+                    <Column editable="false" title="G&amp;Q Repair" type="java.lang.Object"/>
+                    <Column editable="false" title="SS" type="java.lang.Object"/>
+                    <Column editable="false" title="SS Repair" type="java.lang.Object"/>
+                    <Column editable="false" title="L Install" type="java.lang.Object"/>
+                    <Column editable="false" title="Cabinet" type="java.lang.Object"/>
+                    <Column editable="false" title="Dropoff/Pickup" type="java.lang.Object"/>
+                    <Column editable="false" title="Tile" type="java.lang.Object"/>
+                    <Column editable="false" title="QuoteID" type="java.lang.Object"/>
+                    <Column editable="false" title="Follow-up Date" type="java.lang.Object"/>
+                    <Column editable="false" title="Awarded" type="java.lang.Object"/>
+                    <Column editable="false" title="Reason" type="java.lang.Object"/>
+                    <Column editable="false" title="Price" type="java.lang.Object"/>
+                    <Column editable="false" title="Contact/Location" type="java.lang.Object"/>
+                    <Column editable="false" title="Quote Date" type="java.lang.Object"/>
+                    <Column editable="false" title="Open/Closed" type="java.lang.Object"/>
+                    <Column editable="false" title="Inventory ID" type="java.lang.Object"/>
+                    <Column editable="false" title="Invoice#" type="java.lang.Object"/>
+                    <Column editable="false" title="Install Date" type="java.lang.Object"/>
+                    <Column editable="false" title="Due Date" type="java.lang.Object"/>
+                    <Column editable="false" title="Check Date" type="java.lang.Object"/>
+                    <Column editable="false" title="Business" type="java.lang.Object"/>
+                    <Column editable="false" title="Amount Due" type="java.lang.Object"/>
+                    <Column editable="false" title="Total Amount" type="java.lang.Object"/>
+                    <Column editable="false" title="PO#" type="java.lang.Object"/>
                   </Table>
                 </Property>
+                <Property name="autoResizeMode" type="int" value="0"/>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
